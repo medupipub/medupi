@@ -264,7 +264,7 @@ body.publications-page .header {
 
 /* Ensure content doesn’t get hidden behind the fixed header */
 body.publications-page main {
-    margin-top: 100px; /* Push content down so it's visible */
+    margin-top: 140px; /* Push content down so it's visible */
 }
 
 /* Publications container - Arrange sections side by side */
@@ -275,12 +275,15 @@ body.publications-page main {
     padding: 20px;
     border: 1px solid #ccc;
     gap: 20px; /* Add spacing between left and right sections */
+    align-items: flex-start; /* Ensures left and right sections align at the top */
 }
 
-/* Left section: Cover image */
-.cover-section {
-    flex: 30%; /* Takes up 30% of available width */
-    text-align: center;
+/* Left Section (Cover + Specs) */
+.left-section {
+    flex: 30%; /* Takes 30% of the width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
   
   .cover-section img {
@@ -290,24 +293,59 @@ body.publications-page main {
     margin: 0 auto;   /* Center the image horizontally */
   }
 
+/* Specs Section (Under Cover Image) */
+.specs-section {
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
 /* Right section: Title, author, and content */
 .right-section {
     flex: 70%; /* Takes up 70% of available width */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers content vertically */
+    
 }
 
+/* Title and Content aligned at the top */
+.title-author-section,
+.content-section {
+    margin-bottom: 10px; /* Adds spacing */
+}
+
+/* Gallery Section (Three Images with Captions) */
+.gallery-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: space-between; /* Ensures even spacing */
+}
+
+    .gallery-section .gallery-item {
+        text-align: center;
+        width: 32%; /* Ensures 3 images fit neatly */
+    }
+
+    .gallery-section img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
+
+
 /* Styling for title and author */
-.title-author-section h2,
+/*.title-author-section h2,
 .title-author-section p {
     margin: 0;
 }
 
 /* Make sure content flows well inside */
-.content-section {
+/*.content-section {
     margin-top: 10px;
-}
+}*/
   
 
 /* ---------------- Responsive Design ---------------- */
