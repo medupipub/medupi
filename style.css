@@ -264,7 +264,7 @@ body.publications-page .header {
 
 /* Ensure content doesn’t get hidden behind the fixed header */
 body.publications-page main {
-    margin-top: 140px; /* Push content down so it's visible */
+    margin-top: 150px; /* Push content down so it's visible */
 }
 
 /* Publications container - Arrange sections side by side */
