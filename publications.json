@@ -23,22 +23,23 @@
       "content": "Igshaan Adams’ first monograph, published on the occasion of his Standard Bank Young Artist Award 2018, traces his work from 2009, including the making of the travelling award exhibition.\nEach book comes in a unique material cover, sewn by the artist.\nPublished by blank projects and Contemporary Office (SA)",
       "specs": "2018\nEnglish\n237 pages\nHardcover, 19 x 24,5 cm\nISBN: 978-0-620-79882-2"
     },
+  {
+    "id": 4,
+    "title": "Umlindelo wamaKholwa",
+    "author": "Sabelo Mlangeni",
+    "cover_photo": "assets/UM-01.png",
+    "content": "A photobook accompanying Mlangeni’s exhibition at Wits Art Museum, Johannesburg, 27 June - 28 October 2018. Curated by Kabelo Malatsie, Umlindelo wamaKholwa features mostly black and white photographs focusing on two South African Zionist church communities.With texts by Joel Cabrita, Lesley Cohen, Kabelo Malatsie, Sabelo Mlangeni, Hlonipha Mokoena and Tamar Garb",
+"specs":  "2018\nEnglish\n128 pages\nHardcover, 16,5 x 24 cm\nISBN: 978-0-620-79786-3"  
+  },
     {
-        "id": 2,
-        "title": "Another title",
-        "author": "Another Author",
-        "cover_photo": "assets/matter_mattering_matters.png",
-        "content": "Igshaan Adams’ first monograph, published on the occasion of his Standard Bank Young Artist Award 2018, traces his work from 2009, including the making of the travelling award exhibition. Each book comes in a unique material cover, sewn by the artist."
-    },
-    {
-        "id": 2,
+        "id": 5,
         "title": "Mass Traffic",
         "author": "Lantian Xie & Sabih Ahmed",
         "cover_photo": "assets/mass_traffic.png",
         "content": "more content here......................."
     },
     {
-        "id": 1,
+        "id": 6,
         "title": "This is my title",
         "author": "Author Name",
         "cover_photo": "assets/matter_mattering_matters.png",
