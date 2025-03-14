@@ -56,19 +56,6 @@ body {
     padding: 20px;
     transition: transform 1.5s ease;
 }
-/* ------------------- Header Styles on other pages ----------------------*/
-/* Publications page header (always small) */
-body.publications-page .header {
-    height: 80px !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Ensure content doesn’t get hidden behind the fixed header */
-body.publications-page main {
-    margin-top: 100px; /* Push content down so it's visible */
-}
 
 
 /* ---------------- Main Content and Layout ---------------- */
@@ -266,6 +253,20 @@ body.publications-page main {
 }
 
 /* ---------------- Publications Page ---------------- */
+
+/* Publications page header (always small) */
+body.publications-page .header {
+    height: 80px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ensure content doesn’t get hidden behind the fixed header */
+body.publications-page main {
+    margin-top: 100px; /* Push content down so it's visible */
+}
+
 .publication-container {
     display: flex;
     flex-direction: column; /* Stack sections vertically */
