@@ -254,6 +254,19 @@ body {
 
 /* ---------------- Publications Page ---------------- */
 
+/* Publications page header (always small) */
+body.publications-page .header {
+    height: 80px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ensure content doesn’t get hidden behind the fixed header */
+body.publications-page main {
+    margin-top: 100px; /* Push content down so it's visible */
+}
+
 /* Publications container - Arrange sections side by side */
 .publication-container {
     display: flex; /* Change from column to row */
@@ -269,13 +282,13 @@ body {
     flex: 30%; /* Takes up 30% of available width */
     text-align: center;
 }
-
-    .cover-section img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-    }
+  
+  .cover-section img {
+    max-width: 100%; /* Image takes up the full width of its container */
+    height: auto;
+    display: block; /* Remove extra space below image */
+    margin: 0 auto;   /* Center the image horizontally */
+  }
 
 /* Right section: Title, author, and content */
 .right-section {
@@ -295,7 +308,6 @@ body {
 .content-section {
     margin-top: 10px;
 }
-
   
 
 /* ---------------- Responsive Design ---------------- */
