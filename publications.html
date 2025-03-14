@@ -11,17 +11,23 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   </head>
   <body>
-    <div class="publication-container">
-      <div class="cover-section">
-        <img id="cover-image" src="" alt="Cover Photo" />
+      <!-- Directly include the header -->
+      <!--Possibly think about header as own HTML page-->
+      <header class="header">
+          <div class="header-content">medupi</div>
+          <div class="blur-bottom"></div>
+      </header>
+      <div class="publication-container">
+          <div class="cover-section">
+              <img id="cover-image" src="" alt="Cover Photo" />
+          </div>
+          <div class="title-author-section">
+              <h2 id="publication-title"></h2>
+              <p id="publication-author"></p>
+          </div>
+          <div class="content-section" id="publication-content"></div>
       </div>
-      <div class="title-author-section">
-        <h2 id="publication-title"></h2>
-        <p id="publication-author"></p>
-      </div>
-      <div class="content-section" id="publication-content"></div>
-    </div>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="publications.js"></script>
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      <script src="publications.js"></script>
   </body>
 </html>
