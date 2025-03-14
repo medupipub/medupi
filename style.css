@@ -267,23 +267,36 @@ body.publications-page main {
     margin-top: 150px; /* Push content down so it's visible */
 }
 
-/* Publications container - Arrange sections side by side */
+/* Container for publication layout */
 .publication-container {
-    display: flex; /* Change from column to row */
-    max-width: 1200px;
+    display: flex; /* Use flexbox for side-by-side layout */
+    max-width: 1200px; /* Adjust as needed */
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
-    gap: 20px; /* Add spacing between left and right sections */
-    align-items: flex-start; /* Ensures left and right sections align at the top */
 }
 
-/* Left Section (Cover + Specs) */
+/* Left section takes up 30% of the width */
 .left-section {
-    flex: 30%; /* Takes 30% of the width */
+    width: 30%;
+    padding-right: 20px;
+}
+
+/* Right section takes up 70% of the width */
+.right-section {
+    width: 70%;
+}
+
+/* Flex properties for the sections inside right and left */
+.left-section,
+.right-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Stack sections vertically */
+}
+
+/* Style for the cover section (inside left-section) */
+.cover-section {
+    text-align: center;
 }
   
   .cover-section img {
@@ -302,39 +315,26 @@ body.publications-page main {
     color: #555;
 }
 
-/* Right section: Title, author, and content */
-.right-section {
-    flex: 70%; /* Takes up 70% of available width */
-    display: flex;
-    flex-direction: column;
-    
+
+/* Styling for the title and author section (inside right-section) */
+.title-author-section h2,
+.title-author-section p {
+    margin: 0;
 }
 
-/* Title and Content aligned at the top */
-.title-author-section,
+/* Styling for content section (inside right-section) */
 .content-section {
-    margin-bottom: 10px; /* Adds spacing */
-}
-
-/* Gallery Section (Three Images with Captions) */
-.gallery-section {
-    display: flex;
-    gap: 10px;
     margin-top: 20px;
-    justify-content: space-between; /* Ensures even spacing */
 }
 
-    .gallery-section .gallery-item {
-        text-align: center;
-        width: 32%; /* Ensures 3 images fit neatly */
-    }
+/* Gallery section */
+.gallery-section {
+    margin-top: 20px;
+}
 
-    .gallery-section img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-    }
-
+.gallery-item {
+    margin-bottom: 10px;
+}
 
 /* Styling for title and author */
 /*.title-author-section h2,
