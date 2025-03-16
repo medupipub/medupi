@@ -33,7 +33,7 @@
               },
     "spread01": "assets/MMM-Spread-01.png",
     "spread02": "assets/MMM-Spread-02.png",
-    "spread03": "assets/MMM-Spread-03.png"
+    "spread03": ""
   },
     {
       "id": 3,
@@ -58,6 +58,7 @@
     "title": "Umlindelo wamaKholwa",
     "author": "Sabelo Mlangeni",
     "frontcover": "assets/UWK-Frontcover.png",
+    "backcover":"",
     "content": "A photobook accompanying Mlangeni’s exhibition at Wits Art Museum, Johannesburg, 27 June - 28 October 2018. Curated by Kabelo Malatsie, Umlindelo wamaKholwa features mostly black and white photographs focusing on two South African Zionist church communities.With texts by Joel Cabrita, Lesley Cohen, Kabelo Malatsie, Sabelo Mlangeni, Hlonipha Mokoena and Tamar Garb",
     "specs": {
       "year" : "2018",
@@ -68,48 +69,24 @@
               },
     "spread01": "assets/UWK-Spread-01.png",
     "spread02": "assets/UWK-Spread-02.png",
-    "spread03": "assets/UWK-Spread-03.png"
+    "spread03": ""
   },
     {
         "id": 5,
-        "title": "Mass Traffic",
-        "author": "Lantian Xie & Sabih Ahmed",
-        "frontcover": "assets/mass_traffic.png",
-        "content": "more content here......................."
-    },
-    {
-        "id": 6,
-        "title": "This is my title",
-        "author": "Author Name",
-        "cover_photo": "assets/matter_mattering_matters.png",
-        "content": "content here......................."
-    },
-    {
-        "id": 2,
-        "title": "Mass Traffic",
-        "author": "Lantian Xie & Sabih Ahmed",
-        "cover_photo": "assets/mass_traffic.png",
-        "content": "more content here......................."
-    },
-    {
-        "id": 2,
-        "title": "Another title",
-        "author": "Another Author",
-        "cover_photo": "assets/matter_mattering_matters.png",
-        "content": "more content here......................."
-    },
-    {
-        "id": 2,
-        "title": "Mass Traffic",
-        "author": "Lantian Xie & Sabih Ahmed",
-        "cover_photo": "assets/mass_traffic.png",
-        "content": "more content here......................."
-    },
-    {
-        "id": 2,
-        "title": "Another title",
-        "author": "Another Author",
-        "cover_photo": "assets/matter_mattering_matters.png",
-        "content": "more content here......................."
+        "title": "Matšatši a ...",
+    "author": "Kabelo Malatsie (Editor)",
+    "frontcover": "assets/MA-Frontcover.png",
+    "backcover": "",
+    "content": "Published by the Emile Stipp Collection on the occasion of the screening 'Matšatši a ...' Johannesburg, 10 September 2017. Curated and edited by Kabelo Malatsie",
+    "specs": {
+      "year" : "2017",
+      "language" : "English",
+      "pages" : "128 pages",
+      "physical" : "Softcover, 148 x 210mm",
+      "ISBN" : "" 
+              },
+    "spread01": "assets/MA-Spread-01.png",
+    "spread02": "",
+    "spread03": ""
     }
 ]

@@ -65,7 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         showingFront = !showingFront; // Toggle state
       });
-      })
+
+     })
       .catch((error) =>
         console.error("Error fetching publication details:", error)
       );
