@@ -39,17 +39,36 @@
       "id": 3,
       "title": "When Dust Settles",
       "author": "Igshaan Adams",
-      "frontcover": "assets/WDS-01.png",
+      "frontcover": "assets/WDS-Frontcover.png",
+      "backcover": "assets/WDS-BCover.png",
       "content": "Igshaan Adams’ first monograph, published on the occasion of his Standard Bank Young Artist Award 2018, traces his work from 2009, including the making of the travelling award exhibition.\nEach book comes in a unique material cover, sewn by the artist.\nPublished by blank projects and Contemporary Office (SA)",
-      "specs": "2018\nEnglish\n237 pages\nHardcover, 19 x 24,5 cm\nISBN: 978-0-620-79882-2"
+      "specs": {
+        "year" : "2018",
+        "language" : "English",
+        "pages" : "240 pages",
+        "physical" : "Hardcover, 190 x 245mm",
+        "ISBN" : "978-0-620-79882-2" 
+                },
+      "spread01": "assets/WDS-Spread-01.png",
+      "spread02": "assets/WDS-Spread-02.png",
+      "spread03": "assets/WDS-Spread-03.png"
     },
   {
     "id": 4,
     "title": "Umlindelo wamaKholwa",
     "author": "Sabelo Mlangeni",
-    "frontcover": "assets/UWK-01.png",
+    "frontcover": "assets/UWK-Frontcover.png",
     "content": "A photobook accompanying Mlangeni’s exhibition at Wits Art Museum, Johannesburg, 27 June - 28 October 2018. Curated by Kabelo Malatsie, Umlindelo wamaKholwa features mostly black and white photographs focusing on two South African Zionist church communities.With texts by Joel Cabrita, Lesley Cohen, Kabelo Malatsie, Sabelo Mlangeni, Hlonipha Mokoena and Tamar Garb",
-    "specs":  "2018\nEnglish\n128 pages\nHardcover, 16,5 x 24 cm\nISBN: 978-0-620-79786-3"  
+    "specs": {
+      "year" : "2018",
+      "language" : "English",
+      "pages" : "128 pages",
+      "physical" : "Hardcover, 165 x 240mm",
+      "ISBN" : "978-0-620-79786-3" 
+              },
+    "spread01": "assets/UWK-Spread-01.png",
+    "spread02": "assets/UWK-Spread-02.png",
+    "spread03": "assets/UWK-Spread-03.png"
   },
     {
         "id": 5,
