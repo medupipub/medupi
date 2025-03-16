@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Create the image (<img>) element
         const img = document.createElement("img");
-        img.src = publication.cover_photo || "assets/default_cover.jpg"; // Use a default image if cover_photo is missing
+        img.src = publication.frontcover|| "assets/default_cover.jpg"; // Use a default image if cover_photo is missing
         img.alt = "Book Cover";
 
         // Create the caption (<div>) element

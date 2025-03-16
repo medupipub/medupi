@@ -29,14 +29,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
   
         // Populate the page with publication details
-        document.getElementById("cover-image").src = publication.cover_photo;
-        document.getElementById("cover-image").alt = publication.title; //Use alt text
+        const coverImage = document.getElementById("frontcover");
         document.getElementById("publication-title").textContent =
           publication.title;
         document.getElementById("publication-author").textContent =
           "By " + publication.author;
         document.getElementById("publication-content").textContent =
           publication.content;
+        document.getElementById("spread01").src = publication.spread01;
+        document.getElementById("spread02").src = publication.spread02;
+        document.getElementById("spread03").src = publication.spread03;
+
+        const specsSection = document.getElementById("publication-specs");
+        const specs = publication.specs;
+        let specsHTML = "<ul>";
+    for (const [key, value] of Object.entries(specs)) {
+      specsHTML += `<li><strong>${key}:</strong> ${value}</li>`;
+    }
+    specsHTML += "</ul>";
+
+    // Insert the HTML into the specs section
+    specsSection.innerHTML = specsHTML;
+      
+    // Set the initial image source
+    coverImage.src = publication.frontcover;
+    coverImage.alt = publication.title;
+      // Add event listener for click to toggle between front and back covers
+      let showingFront = true; // Track which image is currently displayed
+
+      coverImage.addEventListener("click", () => {
+        if (showingFront) {
+          coverImage.src = publication.backcover; // Show back cover
+        } else {
+          coverImage.src = publication.frontcover; // Show front cover
+        }
+        showingFront = !showingFront; // Toggle state
+      });
       })
       .catch((error) =>
         console.error("Error fetching publication details:", error)

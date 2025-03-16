@@ -264,6 +264,17 @@ body.publications-page .header {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed; /* Make header fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #9bc7ec;
+    z-index: 10; /* Ensure it's above content */
+}
+
+/* Set background color for the publications page */
+body.publications-page {
+    background-color: #8296f5;
 }
 
 /* Style the back button */
@@ -285,19 +296,13 @@ body.publications-page .back-button img {
     object-fit: contain;
 }
 
-/* Ensure content doesn�t get hidden behind the fixed header */
-body.publications-page main {
-    background-color: #8296f5;
-    margin-top: 400px; /* Push content down so it's visible */
-}
-
-/* Container for publication layout */
-.publication-container {
+/* Ensure content doesn’t get hidden behind the fixed header */
+body.publications-page .publication-container {
     display: flex; /* Use flexbox for side-by-side layout */
-    max-width: 1200px; /* Adjust as needed */
-    margin: 100px auto;
+    max-width: 1200px;
+    margin: 120px auto 40px; /* Adjust top margin for fixed header */
     padding: 20px;
-    /*border: 1px solid #ccc;*/
+    /* Use padding instead of margin-top to avoid content being pushed out of view */
 }
 
 /* Left section takes up 30% of the width */
@@ -352,14 +357,45 @@ body.publications-page main {
     margin-top: 20px;
 }
 
+/* Styling for the specs section*/
+#publication-specs {
+    text-align: left; /* Left align the text */
+    font-family: 'Verdana', sans-serif; /* Set a clean, readable font */
+    color: #555; /* Set text color */
+    padding: 0; /* Optional: Reset padding */
+    margin: 0; /* Optional: Reset margin */
+  }
+  
+  #publication-specs ul {
+    list-style-type: none; /* Remove bullet points */
+    padding-left: 0; /* Remove padding */
+  }
+  
+  /* #publication-specs li {
+    font-family: 'Arial', sans-serif; 
+    font-size: 14px; 
+    line-height: 1.6; 
+    margin-bottom: 8px; 
+  } */
+ 
+  
+  #publication-specs li strong {
+    display: none; /* Hides the labels (e.g., "year", "isbn") */
+  }
+
 /* Gallery section */
 .gallery-section {
     margin-top: 20px;
 }
 
-.gallery-item {
-    margin-bottom: 10px;
-}
+#spread01, #spread02, #spread03 {
+    width: 100%; /* Ensures it stretches to the full width of the container */
+    max-width: 100%; /* Prevents it from exceeding its container */
+    height: auto; /* Keeps the aspect ratio */
+    object-fit: cover; /* Ensures it fits nicely */
+  }
+
+
 
 /* Styling for title and author */
 /*.title-author-section h2,
