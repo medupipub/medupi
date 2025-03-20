@@ -568,83 +568,78 @@ body.publications-page .publication-container {
 
 /* ---------------- Publications Page v2 ---------------- */
 
-.publications.container {
-  min-height: 100vh; /* Ensures it takes up at least the full viewport height */
-  display: flex; /* Helps maintain layout structure */
-  flex-direction: column; /* Stacks content properly */
+.publications-container {
+  display: flex;  /* Ensures left and right columns are side by side */
+  height: 100vh;  /* Full viewport height */
 }
 
+/* Left Column */
 .v2left-column {
   width: 25%;
   background-color: #f4f4f4;
   padding: 20px;
   position: fixed;
-  top: 80px; /* Push below header */
-  left: 0; /* Ensure it's positioned correctly */
-  height: calc(100vh - 80px);
-  overflow: hidden;
+  top: 80px; /* Adjust if necessary */
+  left: 0;
+  bottom: 0;
+  overflow-y: auto; /* Allows scrolling if the list is long */
 }
 
-
-/* Right Column Container */
+/* Right Column */
 .v2right-column {
-  flex-grow: 1; /* Ensures it stretches */
-  }
-
-  .v2right-column img {
-    max-width: 100%;  /* Ensures the image never exceeds the column width */
-    height: auto;     /* Maintains aspect ratio */
-    display: block;   /* Removes extra space below inline images */
-    object-fit: contain; /* Ensures the whole image is visible */
+  margin-left: 25%; /* Makes space for the fixed left column */
+  padding: 40px;
+  overflow-y: auto; /* Allows scrolling */
+  flex-grow: 1; /* Fills remaining space */
+  max-width: 60%; /* Ensures it doesn't stretch too much */
+  box-sizing: border-box;
 }
-  
-  /* Front Cover Image */
-  .frontcover {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* Title Styles */
-  .title {
-    font-family: 'Oso Serif VF', serif;
-    font-size: 70px;
-    font-weight: 600;
-    line-height: 65pt;
-    letter-spacing: -0.25em; /* Tracking -25 */
-    margin-top: 30px;
-  }
-  
-  /* Author Styles */
-  .author {
-    font-family: 'Oso Serif VF', serif;
-    font-size: 24px;
-    font-weight: 600;
-    margin-top: 30px;
-  }
-  
-  /* Content Styles */
-  .content {
-    font-family: 'Neue Haas Unica W1G', sans-serif;
-    font-weight: 100;
-    font-size: 20px;
-    /*letter-spacing: -0.25em;  Tracking -25 */
-    text-align: justify;
-    margin-top: 30px;
-  }
-  
-  /* Gap */
-  .gap {
-    height: 30px;
-  }
-  
-  /* Spread Image Styles */
-  .spread {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin-top: 30px;
-  }
+
+/* Images */
+.v2right-column img {
+  max-width: 100%;  /* Ensures images fit within the container */
+  height: auto; /* Keeps aspect ratio */
+  display: block;
+  margin: 0 auto; /* Centers images */
+  font-size: 0; /*hides alt text once loaded*/
+}
+
+/* Front Cover */
+.frontcover {
+  max-width: 20%; /* Controls front cover size */
+  margin: 0 auto; /* Centers it */
+}
+
+/* Title */
+.title {
+  font-family: 'Oso Serif VF', serif;
+  font-size: 48px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Author */
+.author {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Content */
+.content {
+  font-size: 20px;
+  text-align: justify;
+  margin-top: 30px;
+  line-height: 1.5;
+}
+
+/* Spread Images */
+.spread {
+  max-width: 50%; /* Keeps spreads from being too big */
+  margin: 30px auto; /* Centers and spaces them */
+}
 
 /* ---------------- Responsive Design ---------------- */
 
