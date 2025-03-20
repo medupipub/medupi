@@ -220,5 +220,7 @@ carouselItems.forEach(item => {
         const publicationId = item.getAttribute('data-id');
         window.location.href = `./publications/${publicationId}`;
     });
+
+  
 });
 

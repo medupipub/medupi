@@ -14,40 +14,50 @@
     <!--<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />-->
   </head>
   <body class="publications-page"> <!-- created this class for easier css access-->
-     
-    <!-- Directly include the header -->
-      <!--Possibly think about header as own HTML page-->
-      <header class="header">
+    
+    <!-- Publications Header Version -->
+    <header class="header">
+        <div class="header-content">
           <a href="index.html" class="back-button">
-            <img src="assets/Arrow_L.png" alt="Back" />
+            <img src="assets/SVG/Arrow_L.svg" alt="Back" />
           </a>
-          <div class="header-content">medupi</div>
-          <div class="blur-bottom"></div>
-      </header>
-      <div class="publication-container">
-          <!-- Left side (30%) -->
-          <div class="left-section">
-              <div class="cover-section">
-                  <img id="frontcover" src="" alt="Cover Photo" />
-              </div>
-              <div class="specs-section" id="publication-specs"></div>
-         </div>
-          <!-- Right side (70%) -->
-              <div class="right-section">
-                  <div class="title-author-section">
-                      <h2 id="publication-title"></h2>
-                      <p id="publication-author"></p>
-                  </div>
-                  <div class="content-section" id="publication-content"></div>
-                  <div class="gallery-section">
-                      <img id="spread01" src=""/>
-                      <img id="spread02" src=""/>
-                      <img id="spread03" src=""/>
-                  </div>
-                  </div>
-              </div>
-              </div>
-              <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-              <script src="publications.js"></script>
+          <a href="index.html" class="home-button">
+            <img src="assets/SVG/medupi_logo.svg" alt="Home" />
+          </a>
+          <a href="#" id="burger-icon">
+            <img id="menu-icon" src="assets/SVG/burger.svg" alt="Menu" />
+          </div>
+        </div>
+        <div id="header-menu">
+          <a href="#" class="menu-item">About</a>
+          <a href="#" class="menu-item">Contact</a>
+          <a href="#" class="menu-item">Updates</a>
+      </div>
+    </header>
+
+
+    <div class="publications.container">
+        <div class="v2left-column">
+          <ol id="publication-list">
+            <!-- Publication links will be inserted here dynamically -->
+          </ol>
+        </div>
+       
+        <div class="v2right-column">
+          <img id="frontcover" class="frontcover" alt="Front Cover">
+          <div class="gap"></div>
+          <h1 id="publication-title" class="title"></h1>
+          <h2 id="publication-author" class="author"></h2>
+          <div class="gap"></div>
+          <p id="publication-content" class="content"></p>
+          <div class="gap"></div>
+          <img id="spread01" class="spread" alt="Spread 1">
+          <img id="spread02" class="spread" alt="Spread 2">
+          <img id="spread03" class="spread" alt="Spread 3">
+      </div>
+    </div>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="publications.js"></script>
+    
 </body>
 </html>
