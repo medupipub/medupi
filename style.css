@@ -27,6 +27,16 @@ body {
     background-color: #9bc7ec;
 }
 
+h2 {
+  font-family: "oso-serif-variable", sans-serif;
+  font-weight: 600;
+  /* font-stretch: 70%; */
+  line-height: 90%;
+  position: relative;
+  z-index: 2;
+  font-size: 2.8em;
+  }
+
 
 /* ---------------- Header Styles ---------------- */
 
@@ -575,8 +585,8 @@ body.publications-page .publication-container {
 
 /* Left Column */
 .v2left-column {
-  width: 25%;
-  background-color: #f4f4f4;
+  width: 30%;
+  background: #8296f5;
   padding: 20px;
   position: fixed;
   top: 80px; /* Adjust if necessary */
@@ -587,7 +597,7 @@ body.publications-page .publication-container {
 
 /* Right Column */
 .v2right-column {
-  margin-left: 25%; /* Makes space for the fixed left column */
+  margin-left: 30%; /* Makes space for the fixed left column */
   padding: 40px;
   overflow-y: auto; /* Allows scrolling */
   flex-grow: 1; /* Fills remaining space */
@@ -616,7 +626,7 @@ body.publications-page .publication-container {
   font-size: 48px;
   font-weight: 600;
   text-align: center;
-  margin-top: 30px;
+  
 }
 
 /* Author */
@@ -624,7 +634,7 @@ body.publications-page .publication-container {
   font-size: 24px;
   font-weight: 600;
   text-align: center;
-  margin-top: 10px;
+ 
 }
 
 /* Content */

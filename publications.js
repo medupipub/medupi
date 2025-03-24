@@ -5,12 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
     return urlParams.get(param);
   }
 
+   // Function to replace line breaks with <br> for any text field
+   function formatText(text) {
+    return text ? text.replace(/\n/g, "<br>") : "";
+  }
   // Fetch the publications when the page loads
   fetch("publications.json")
     .then((response) => response.json())
     .then((publications) => {
       const publicationList = document.getElementById("publication-list");
       const publicationContent = document.getElementById("publication-content");
+      
 
       // Create the left column links dynamically based on the JSON data
       publications.forEach((publication) => {
@@ -18,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         link.href = "#"; // No page reload
         link.textContent = publication.title;
         link.setAttribute("data-id", publication.id); // Store the publication id
-
+        
         // Add the link to the left column
         const listItem = document.createElement("li");
         listItem.appendChild(link);
@@ -33,18 +38,21 @@ document.addEventListener("DOMContentLoaded", () => {
           const publication = publications.find((pub) => pub.id === parseInt(publicationId));
 
           if (publication) {
-            // Populate the right column with the publication content
+                      // Populate the right column with the publication content
             publicationContent.innerHTML = `
-              <h2>${publication.title}</h2>
-              <h3>by ${publication.author}</h3>
-              <p><strong>Year:</strong> ${publication.specs.year}</p>
-              <p><strong>Language:</strong> ${publication.specs.language}</p>
-              <p><strong>Pages:</strong> ${publication.specs.pages}</p>
-              <p><strong>Physical:</strong> ${publication.specs.physical}</p>
-              <p><strong>ISBN:</strong> ${publication.specs.ISBN}</p>
-              <p><strong>Content:</strong> ${publication.content}</p>
               <img src="${publication.frontcover}" alt="${publication.title} Front Cover">
-              <img src="${publication.backcover}" alt="${publication.title} Back Cover">
+              <h2>${formatText(publication.title)}</h2>
+              <h3>by ${publication.author}</h3>
+              <p> ${publication.content}</p>
+              
+              
+              <p> ${publication.specs.year}</p>
+              <p> ${publication.specs.language}</p>
+              <p> ${publication.specs.pages}</p>
+              <p> ${publication.specs.physical}</p>
+              <p> ${publication.specs.ISBN}</p>
+             
+              
               <div>
                 <img src="${publication.spread01}" alt="${publication.title} Spread 1">
                 <img src="${publication.spread02}" alt="${publication.title} Spread 2">
