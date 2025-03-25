@@ -159,7 +159,9 @@ body.publications-page .menu a:hover {
 }
 
 .publications-list {
-  width: var(--sidebar-width);
+  
+  width: 20%;
+  /*width: var(--sidebar-width);*/
   height: 100%;
   background-color: var(--sidebar-bg);
   padding: var(--spacing);
@@ -167,6 +169,7 @@ body.publications-page .menu a:hover {
   padding-top: 50px;
   box-sizing: border-box;
   overflow-y: auto;
+  
 }
 
 /* Updated list item styles */
@@ -185,19 +188,19 @@ body.publications-page .menu a:hover {
   text-decoration: underline;
 }
 
+/* Divider */
 .divider {
-  width: var(--divider-width);
+  /*width: var(--divider-width);*/
   background-color: transparent;
-  position: relative;
+  height: 100%; /* Ensure it takes full height of parent */
+  display: flex;
+  justify-content: center; /* Centers the image in the divider */
 }
 
 .divider-img {
-  position: fixed;
-  top: 20vh;
-  left: var(--sidebar-width);
-  width: var(--divider-width);
-  height: auto;
-  z-index: 5;
+  width: 100%; /* Take full width of divider */
+  height: 100%; /* Take full height of parent divider */
+  object-fit: contain; /* Ensure the image fits properly */
 }
 
 /* ======================= */

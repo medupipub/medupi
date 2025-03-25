@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
       publications.forEach((publication) => {
         const link = document.createElement("a");
         link.href = `?id=${publication.id}`; // Ensure the publication ID is passed in the URL
-        link.textContent = publication.title;
+        link.innerHTML = publication.title + "<br>" + publication.author;
+        
         link.setAttribute("data-id", publication.id);
 
         const listItem = document.createElement("li");
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Highlight the publication if it matches the ID in the URL
         if (publicationIdFromURL && publicationIdFromURL == publication.id) {
           link.style.fontWeight = "bold";
-          link.textContent = publication.title + " ●"; // Add the circle to selected publication
+          link.innerHTML = publication.title + "<br>" + publication.author + " ●"; // Add the circle to selected publication
           selectedLink = link; // Mark this link as selected
 
           // Populate content immediately when the page loads
@@ -47,13 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Remove bold and circle from previously selected link
           if (selectedLink) {
-            selectedLink.style.fontWeight = "lighter";
-            selectedLink.textContent = selectedLink.textContent.replace(" ●", "");
+            selectedLink.style.fontWeight = "";
+            selectedLink.style.backgroundColor = "";
+            selectedLink.innerHTML = selectedLink.innerHTML.replace(" ●", "");
           }
 
           // Apply bold and append the circle to the clicked link
           link.style.fontWeight = "bold";
-          link.textContent = publication.title + " ●";
+          link.style.backgroundColor = "orange"; // Or any color you prefer
+          link.innerHTML= publication.title  + "<br>" + publication.author + " ●";
           selectedLink = link; // Update selected link
 
           const publicationId = event.target.getAttribute("data-id");
