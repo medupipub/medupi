@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Remove bold and circle from previously selected link
           if (selectedLink) {
-            selectedLink.style.fontWeight = "normal";
+            selectedLink.style.fontWeight = "lighter";
             selectedLink.textContent = selectedLink.textContent.replace(" ●", "");
           }
 
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Cover image
     const coverImg = document.createElement("img");
-    coverImg.src = publicationData.hero;
+    coverImg.src = publicationData.frontcover;
     coverImg.alt = `${publicationData.title} Front Cover`;
     coverImg.classList.add("pub-frontcover");
 
@@ -106,11 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const specsElement = document.createElement("div");
     specsElement.classList.add("pub-specs");
     specsElement.innerHTML = `
-      <p><strong>Year:</strong> ${publicationData.specs.year}</p>
-      <p><strong>Language:</strong> ${publicationData.specs.language}</p>
-      <p><strong>Pages:</strong> ${publicationData.specs.pages}</p>
-      <p><strong>Physical:</strong> ${publicationData.specs.physical}</p>
-      <p><strong>ISBN:</strong> ${publicationData.specs.ISBN}</p>
+      <p>${publicationData.specs.year}</p>
+      <p>${publicationData.specs.language}</p>
+      <p>${publicationData.specs.pages}</p>
+      <p>${publicationData.specs.physical}</p>
+      <p>ISBN: ${publicationData.specs.ISBN}</p>
     `;
 
     // Spread images container
@@ -133,8 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent.appendChild(titleElement);
     mainContent.appendChild(authorElement);
     mainContent.appendChild(contentElement);
-    mainContent.appendChild(specsElement);
     mainContent.appendChild(spreadsContainer);
+    mainContent.appendChild(specsElement);
 
     // Inject it into the page
     publicationContent.appendChild(mainContent);

@@ -1,103 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Make sure we start at the top
-  window.scrollTo(0, 0);
-
-  const header = document.querySelector(".header");
-  const headerContent = document.querySelector(".header-content");  // The container
-  const content = document.querySelector(".content");
-  const minHeight = 80; // Final header height
-  const transitionDuration = 1500; // Match your CSS transition (1.5s)
-  let headerShrunk = false;
-
-  // Scroll Lock Flag
-  let isScrollDisabled = true;
-
-  // Disable scrolling by locking scroll position + overflow hidden
-  function disableScroll() {
-    document.body.style.overflow = "hidden";
-
-    // Keep resetting scroll position
-    window.addEventListener("scroll", lockScroll);
-    window.addEventListener("touchmove", preventDefault, { passive: false });
-    window.addEventListener("wheel", preventDefault, { passive: false });
-  }
-
-  // Re-enable scrolling by removing the locks
-  function enableScroll() {
-    document.body.style.overflow = "";
-
-    window.removeEventListener("scroll", lockScroll);
-    window.removeEventListener("touchmove", preventDefault);
-    window.removeEventListener("wheel", preventDefault);
-
-    isScrollDisabled = false;
-  }
-
-  // Keep scroll locked at the top
-  function lockScroll() {
-    if (isScrollDisabled) {
-      window.scrollTo(0, 0);
-    }
-  }
-
-  // Prevent default scroll behavior (for wheel & touchmove)
-  function preventDefault(e) {
-    if (isScrollDisabled) {
-      e.preventDefault();
-    }
-  }
-
-  function shrinkHeader() {
-    if (!headerShrunk) {
-      headerShrunk = true;
-  
-      header.style.height = minHeight + "px";
-      content.style.marginTop = minHeight + "px";
-  
-      // Apply transition for smooth movement
-      headerContent.style.transition = `transform ${transitionDuration}ms ease`;
-  
-      // Calculate the transform value to move from the center to 20px from the leftmost side
-      // We start with translateX(0) for the center, and translate it to 20px from the left edge
-      const parentWidth = header.offsetWidth;  // The width of the header's parent container
-      const moveToLeftOffset = 20;  // Fixed 20px from the left edge
-      const offset = moveToLeftOffset / parentWidth * 100;  // Calculate the percentage of the parent's width
-  
-      // Set the transform to start from the center and move the content to the right by 20px
-      headerContent.style.transform = `translateX(calc(-50vw + 120px))`;
-  
-      // Wait for transition to finish and then re-enable scroll
-      setTimeout(() => {
-        enableScroll();
-      }, transitionDuration);
-  
-      // Once shrunk, prevent further triggering
-      window.removeEventListener("wheel", handleUserScroll);
-      window.removeEventListener("touchstart", handleUserScroll);
-      window.removeEventListener("keydown", handleKeyScroll);
-    }
-  }
-
-  function handleUserScroll() {
-    shrinkHeader();
-  }
-
-  function handleKeyScroll(event) {
-    const keys = ["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Space"];
-    if (keys.includes(event.code)) {
-      shrinkHeader();
-    }
-  }
-
-  // Init scroll lock
-  disableScroll();
-
-  // Only trigger shrink on deliberate user action
-  window.addEventListener("wheel", handleUserScroll, { once: true });
-  window.addEventListener("touchstart", handleUserScroll, { once: true });
-  window.addEventListener("keydown", handleKeyScroll, { once: true });
-
   const swiperWrapper = document.getElementById("swiper-wrapper");
+
+  function formatText(text) {
+    return text
+        .replace(/\n/g, "<br>") // Convert newlines to <br>
+        .replace(/\*([^*]+)\*/g, "<i>$1</i>") // Convert *italic* to <i>italic</i>
+        .replace(/([\w.-]+@[\w.-]+\.\w+)/g, '<a href="mailto:$1">$1</a>'); // Convert emails to mailto links
+}
+
+
 
   fetch("publications.json")
     .then((response) => response.json())
@@ -118,16 +29,33 @@ document.addEventListener("DOMContentLoaded", function () {
         img.src = publication.frontcover || "assets/default_cover.jpg"; // Use a default image if cover_photo is missing
         img.alt = "Book Cover";
 
-        // Create the caption (<div>) element
-        const caption = document.createElement("div");
-        caption.classList.add("carousel-caption");
-        caption.textContent = publication.title;
+        // Create the caption container (<div>) element
+const captionContainer = document.createElement("div");
+captionContainer.classList.add("carousel-caption");
 
-        // Assemble the elements
-        link.appendChild(img);
-        link.appendChild(caption);
-        swiperSlide.appendChild(link);
-        swiperWrapper.appendChild(swiperSlide);
+// Create the title (<div>) element
+const title = document.createElement("div");
+title.classList.add("carousel-title");
+title.textContent = publication.title;
+
+// Create the author (<div>) element
+const author = document.createElement("div");
+author.classList.add("carousel-author");
+author.textContent = publication.author;
+
+       // Append title and author to captionContainer
+captionContainer.appendChild(title);
+captionContainer.appendChild(author);
+
+// Then apply it to your title and author:
+title.innerHTML = formatText(publication.title);
+author.innerHTML = formatText(publication.author);
+
+// Assemble the elements
+link.appendChild(img);
+link.appendChild(captionContainer);
+swiperSlide.appendChild(link);
+swiperWrapper.appendChild(swiperSlide);
       });
 
       // **Check if Swiper is available before initializing**
