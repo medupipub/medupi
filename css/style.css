@@ -8,7 +8,8 @@
   }
 
 html {
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 html, body {
@@ -124,14 +125,6 @@ h2 {
 
 .updates.section{
   background-color: #F5C3C0;
-}
-
-.updates.section .container{
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  min-height: 100vh; /* Allows content to expand naturally */
-  overflow-x: hidden;
 }
 
 .publications {
@@ -378,6 +371,7 @@ footer {
   }
 
 
+  
   .social-links a {
     margin-right: 10px;
     color: white;
