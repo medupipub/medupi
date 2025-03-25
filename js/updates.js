@@ -126,6 +126,6 @@ function loadCarousel(images = [], captions = [], eventCopyText = "") {
 function getRandomArrow() {
     const variations = ["D01", "D02", "D03"]; // Add more if needed
     const randomVariant = variations[Math.floor(Math.random() * variations.length)];
-    return `assets/SVG/droparrow_${randomVariant}.svg`;
+    return `../assets/SVG/droparrow_${randomVariant}.svg`;
 }
 

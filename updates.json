@@ -81,18 +81,6 @@
                             ]
                 }
             ]
-        },
-        {
-            "type": "new-publication",
-            "title": "",
-            "images": [],
-            "copy": ""
-        },
-        {
-            "type": "restock",
-            "title": "",
-            "images": [],
-            "copy": ""
         }
     ]
 }

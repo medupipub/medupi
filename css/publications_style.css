@@ -1,0 +1,320 @@
+/* VARIABLES */
+:root {
+  --header-height: 80px;
+  --sidebar-width: 180px;
+  --divider-width: 22px;
+  --main-width: calc(100% - var(--sidebar-width) - var(--divider-width));
+  --background-color: #8296f5;
+  --sidebar-bg: #8296f5;
+  --primary-color: #333;
+  --highlight-color: #0077cc;
+  --font-family: "neue-haas-unica", sans-serif;
+  --spacing: 5px;
+}
+
+body,
+html {
+  font-family: "neue-haas-unica", sans-serif;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  height: 100%;
+}
+
+a {
+  color: var(--highlight-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.text-h3 {
+  font-size: 1.75rem;
+  /* font-weight: normal; */
+  margin-bottom: var(--spacing);
+}
+
+/* Publications page header (always small) */
+body.publications-page .header {
+  height: 80px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #9bc7ec;
+  z-index: 10;
+}
+
+body.publications-page .header-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+body.publications-page .home-button {
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 135px;
+  height: 45px;
+  cursor: pointer;
+  margin-left: 80px;
+}
+
+body.publications-page .back-button {
+  position: absolute;
+  top: 27px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+
+body.publications-page .menu-button {
+  position: absolute;
+  top: 27px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+
+body.publications-page #header-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  position: absolute;
+  right: 100px;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+body.publications-page #header-menu.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+body.publications-page .menu-item {
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: opacity 0.3s ease-in-out;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+body.publications-page .menu a:hover {
+  opacity: 0.7;
+}
+
+#burger-icon {
+  position: absolute;
+  top: 27px;
+  right: 25px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#burger-icon img {
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.pub-wrapper {
+  display: flex;
+  margin-top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+}
+
+.publications-list {
+  width: var(--sidebar-width);
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  padding: var(--spacing);
+  padding-left: 15px;
+  padding-top: 50px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Updated list item styles */
+#publication-list li {
+  margin-bottom: 10px;
+}
+
+#publication-list li a {
+  display: block;
+  padding: 2px;
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+#publication-list li a:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  width: var(--divider-width);
+  background-color: transparent;
+  position: relative;
+}
+
+.divider-img {
+  position: fixed;
+  top: 20vh;
+  left: var(--sidebar-width);
+  width: var(--divider-width);
+  height: auto;
+  z-index: 5;
+}
+
+/* ======================= */
+/*     MAIN CONTENT        */
+/* ======================= */
+.publication-content {
+  width: var(--main-width);
+  height: 100%;
+  padding: var(--spacing);
+  overflow-y: auto;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  text-align: left;
+
+  /* NEW: Restrict the content width */
+  max-width: 100%;
+}
+
+.pub-main__content {
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+/* Cover Image (Top of Content) */
+.pub-frontcover {
+  width: 100%;
+  max-width: 300px; /* limits the size */
+  height: auto;
+  margin-bottom: var(--spacing);
+  object-fit: contain;
+  display: block;
+}
+
+/* Publication Title and Author */
+.pub-title {
+  font-size: 3rem;
+  text-align: left;
+  margin: 0;
+}
+
+.pub-author {
+  font-size: 2rem;
+  text-align: left;
+  margin: 0;
+}
+
+.pub-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: var(--spacing);
+}
+
+/* Spread Images Section */
+.pub-spreads {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  /* align-items:center; */
+  gap: var(--spacing);
+  /* box-sizing: border-box; */
+}
+
+/* Individual Spread Images */
+.pub-spread {
+  width: 85%;
+  max-width: 800px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  max-height: 80vh;
+}
+
+/* Optional: If pub-spread contains img tags instead of being img tags */
+.pub-spread img {
+  width: 85%;
+  height: auto;
+  object-fit: contain;
+}
+
+.pub-specs{
+  margin: 0;
+  line-height: normal;
+  text-align: left;
+}
+
+.publication-content img {
+  display: block;
+  margin: 0 auto; /* Centers image horizontally */
+  max-width: 70%; /* Ensures responsiveness */
+  height: auto;
+}
+
+
+/* ======================= */
+/*      RESPONSIVE         */
+/* ======================= */
+@media screen and (max-width: 768px) {
+  .pub-wrapper {
+    flex-direction: column;
+  }
+
+  .publications-list {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .publication-content {
+    width: 100%;
+    order: -1;
+  }
+}

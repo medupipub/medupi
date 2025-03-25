@@ -96,62 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("wheel", handleUserScroll, { once: true });
   window.addEventListener("touchstart", handleUserScroll, { once: true });
   window.addEventListener("keydown", handleKeyScroll, { once: true });
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  const sections = document.querySelectorAll('.section');
-
-  // Define separate fade zones for sidebar and main
-  const sidebarFadeStart = 80; // Sidebar starts fading here (px from top)
-  const sidebarFadeEnd = 60;    // Sidebar fully faded here
-
-  const mainFadeStart = -180;     // Main content starts fading here
-  const mainFadeEnd = -280;       // Main fully faded here
-
-  function handleScroll() {
-    sections.forEach(section => {
-      const sidebar = section.querySelector('.section-sidebar');
-      const main = section.querySelector('.section-main');
-
-      // Get the top position of each element relative to the viewport
-      const sidebarDistance = sidebar.getBoundingClientRect().top;
-      const mainDistance = main.getBoundingClientRect().top;
-
-      // --- SIDEBAR FADE ---
-      let sidebarOpacity;
-      if (sidebarDistance >= sidebarFadeStart) {
-        sidebarOpacity = 1;
-      } else if (sidebarDistance <= sidebarFadeEnd) {
-        sidebarOpacity = 0;
-      } else {
-        sidebarOpacity = (sidebarDistance - sidebarFadeEnd) / (sidebarFadeStart - sidebarFadeEnd);
-      }
-
-      sidebar.style.opacity = sidebarOpacity;
-
-
-      // --- MAIN FADE ---
-      let mainOpacity;
-      if (mainDistance >= mainFadeStart) {
-        mainOpacity = 1;
-      } else if (mainDistance <= mainFadeEnd) {
-        mainOpacity = 0;
-      } else {
-        mainOpacity = (mainDistance - mainFadeEnd) / (mainFadeStart - mainFadeEnd);
-      }
-
-      main.style.opacity = mainOpacity;
-
-    });
-  }
-
-  // Attach scroll event
-  window.addEventListener('scroll', handleScroll);
-  handleScroll(); // Run on load too
-});
-
-document.addEventListener("DOMContentLoaded", () => {
   const swiperWrapper = document.getElementById("swiper-wrapper");
 
   fetch("publications.json")
@@ -164,13 +109,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Create the link (<a>) element
         const link = document.createElement("a");
-        link.href = `/publications/${publication.id}`;
+        link.href = `/publications/${publication.id}`; // Using dynamic ID
         link.classList.add("carousel-item");
         link.setAttribute("data-id", publication.id);
 
         // Create the image (<img>) element
         const img = document.createElement("img");
-        img.src = publication.frontcover|| "assets/default_cover.jpg"; // Use a default image if cover_photo is missing
+        img.src = publication.frontcover || "assets/default_cover.jpg"; // Use a default image if cover_photo is missing
         img.alt = "Book Cover";
 
         // Create the caption (<div>) element
@@ -185,49 +130,80 @@ document.addEventListener("DOMContentLoaded", () => {
         swiperWrapper.appendChild(swiperSlide);
       });
 
-        // **Check if Swiper is available before initializing**
-        if (typeof Swiper !== "undefined") {
-            const swiper = new Swiper(".swiper-container", {
-                slidesPerView: 'auto',
-                spaceBetween: 75,
-                loop: true,
-                centeredSlides: false,
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                }
-            });
-        } else {
-            console.error("Swiper failed to load.");
-        }
-      // Event listener for carousel items (moved here to ensure it's attached after dynamic creation)
+      // **Check if Swiper is available before initializing**
+      if (typeof Swiper !== "undefined") {
+        const swiper = new Swiper(".swiper-container", {
+          slidesPerView: "auto",
+          spaceBetween: 75,
+          loop: true,
+          centeredSlides: false,
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+      } else {
+        console.error("Swiper failed to load.");
+      }
+
+      // Event listener for carousel items
       const carouselItems = document.querySelectorAll(".carousel-item");
       carouselItems.forEach((item) => {
         item.addEventListener("click", function (event) {
           event.preventDefault(); // Prevent the default link behavior
           const publicationId = item.getAttribute("data-id");
-          window.location.href = `publications.html?id=${publicationId}`;
+          window.location.href = `publications.html?id=${publicationId}`; // Pass ID in URL
         });
       });
     })
     .catch((error) => console.error("Error fetching publications:", error));
-});
 
 
-const carouselItems = document.querySelectorAll('.carousel-item');
-carouselItems.forEach(item => {
-    item.addEventListener('click', function () {
-        const publicationId = item.getAttribute('data-id');
-        window.location.href = `./publications/${publicationId}`;
-    });
 
-  
-});
-
-document.addEventListener("DOMContentLoaded", function () {
   fetch("footer.html")
       .then(response => response.text())
       .then(data => document.getElementById("footer-container").innerHTML = data)
       .catch(error => console.error("Error loading footer:", error));
-});
 
+
+ // Fetch and display latest post
+ async function loadLatestPost() {
+  try {
+      const response = await fetch("updates.json"); // Fetch the JSON file
+      const data = await response.json();
+
+      // Ensure there are updates available
+      if (data.updates && data.updates.length > 0) {
+          const latestUpdate = data.updates[0]; // Get the first update
+
+          const latestPostContainer = document.getElementById("latest-post");
+          if (!latestUpdate.title) {
+              latestPostContainer.innerHTML = "<p>Latest update has no title.</p>";
+              return;
+          }
+
+          // Build the HTML structure dynamically
+          let html = `
+              <h2>${latestUpdate.title}</h2>
+              <p>${latestUpdate.copy || "No description available."}</p>
+          `;
+
+          if (latestUpdate.images.length > 0) {
+              html += `<img src="${latestUpdate.images[0]}" alt="Latest update image" style="max-width:100%;">`;
+          }
+
+          html += `<a href="updates.html">Read more</a>`;
+
+          latestPostContainer.innerHTML = html;
+      } else {
+          document.getElementById("latest-post").innerHTML = "<p>No updates found.</p>";
+      }
+  } catch (error) {
+      console.error("Error loading latest update:", error);
+      document.getElementById("latest-post").innerHTML = "<p>Failed to load update.</p>";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadLatestPost);
+
+});
