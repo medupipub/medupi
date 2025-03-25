@@ -1,5 +1,8 @@
 /* ---------------- UPDATES ---------------------------*/
 
+.updates-page{
+  overflow-y: auto !important;
+}
 #Dates {
     padding: 100px 0;
   }
@@ -52,7 +55,7 @@
   .column2 .swiper-container {
     width: 100%;
     aspect-ratio: 16 / 9; /* Maintain 16:9 ratio */
-    overflow: hidden;
+    
     
   }
   

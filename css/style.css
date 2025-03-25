@@ -97,7 +97,14 @@ h2 {
 }
 
 .section-sidebar {
-    width: 20%;
+  font-family: "oso-serif-variable", sans-serif;
+  font-weight: 600;
+  /* font-stretch: 70%; */
+  line-height: 90%;
+  position: relative;
+  z-index: 2;
+  font-size: 1.4em;
+      width: 20%;
     display: flex;
     padding: 10px;
     box-sizing: border-box;
@@ -117,6 +124,14 @@ h2 {
 
 .updates.section{
   background-color: #F5C3C0;
+}
+
+.updates.section .container{
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh; /* Allows content to expand naturally */
+  overflow-x: hidden;
 }
 
 .publications {
@@ -139,14 +154,6 @@ h2 {
     padding: 20px;
     min-height: 600px;
 }
-
-.contact .section-main {
-    justify-content: flex-start;
-    text-align: left;
-    align-items: flex-start;
-}
-
-
 
 .swiper-parent {
     position: relative;
@@ -250,15 +257,58 @@ h2 {
 }
 
 .about {
-    background-color: #f5c3c0;
-    z-index: 3;
-    box-shadow: 0 0 0.8rem 0.8rem #f5c3c0
+  background-color: #c1c1f3;
+  z-index: 3;
+  box-shadow: 0 0 0.8rem 0.8rem #c1c1f3;
+  padding: 20px;
 }
 
-.contact {
-    background-color: #c1c1f3;
-    z-index: 2;
-    box-shadow: 0 0 0.8rem 0.8rem #c1c1f3
+/* New container to stack content properly */
+.about .section-content {
+  display: flex;
+  flex-direction: column; /* Stack children (section-main & social-links) */
+  align-items: center; /* Center align everything */
+  width: 100%;
+}
+
+/* Make columns sit next to each other */
+.about .section-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%; /* Ensure full width */
+}
+
+/* Set width for each column */
+.about .section-main .columnA,
+.about .section-main .columnB {
+  width: 48%;
+}
+
+/* Ensure social links are centered below the columns */
+.about .social-links {
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+  margin-right: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.about .social-links p a {
+  color: black; /* Make the link black */
+  text-decoration: none; /* Remove underline */
+  padding: 2px 4px; /* Add some padding for better highlight effect */
+  border-radius: 4px; /* Slightly round the edges */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Optional: Change highlight on hover */
+.about .social-links p a:hover {
+  background-color: orange;
 }
 
 /* ---------------- Footer ---------------- */
@@ -287,12 +337,10 @@ footer {
   }
 
   .footer-left {
-    width: 35%; /* Slightly reduce width to create more middle space */
-    display: flex;
-    flex-direction: column;
+    width: 50%; /* Slightly reduce width to create more middle space */
     justify-content: space-between;
     align-items: flex-start;
-    height: 100%;
+    
   }
   
   .footer-left .footer-bottom {
@@ -303,12 +351,7 @@ footer {
   }
   
   .footer-right {
-    width: 35%; /* Keeps the right section compact */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Aligns everything to the right */
-    height: 100%;
-    margin-left: auto; /* Pushes the right section to the far right */
+    padding: 90px 0;
   }
   
   .footer-right .newsletter {
@@ -333,7 +376,8 @@ footer {
     border: none;
     cursor: pointer;
   }
-  
+
+
   .social-links a {
     margin-right: 10px;
     color: white;
@@ -341,10 +385,6 @@ footer {
     font-size: 18px;
   }
   
-  .social-links a:hover {
-    text-decoration: underline;
-  }
-
 @media (max-width: 768px) {
     .publications.section {
         flex-direction: column;

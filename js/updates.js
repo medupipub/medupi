@@ -129,3 +129,4 @@ function getRandomArrow() {
     return `../assets/SVG/droparrow_${randomVariant}.svg`;
 }
 
+
