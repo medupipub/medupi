@@ -104,10 +104,6 @@ h2 {
     
 }
 
-.section-sidebar p{
-  text-decoration: underline;
-}
-
 .section-main {
     width: 80%;
     display: flex;
@@ -254,6 +250,7 @@ h2 {
   flex-direction: column; /* Stack children (section-main & social-links) */
   align-items: center; /* Center align everything */
   width: 100%;
+  margin: 50px 0;
 }
 
 /* Make columns sit next to each other */
@@ -264,13 +261,20 @@ h2 {
   align-items: flex-start;
   gap: 40px;
   width: 80%;
-  margin: 100px 0;
+  margin: 50px 0;
 }
 
 /* Set width for each column */
 .about .section-main .columnA,
 .about .section-main .columnB {
   width: 48%;
+}
+
+
+.about .section-content a
+{
+  font-weight: 100;
+  background-color: orange;
 }
 
 /* Ensure social links are centered below the columns */
@@ -396,4 +400,15 @@ footer {
         width: 100%;
         text-align: left;
     }
+    .about .section-main{
+      flex-direction: column;
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      width: 80%;
+      margin: 50px 0;
+      align-items: center;
+    }
+
+    
 }

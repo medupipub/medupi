@@ -71,9 +71,9 @@ opacity: 1; /* Ensure caption is visible */
 .vert-divider {
   background-color: #F5C3C0;
   padding: 50px 0;
-  margin: 0 0 0 60px;
+  margin: 100px 0 0 80px;
   width: 5%;
-  max-height:800px;
+  max-height:650px;
 }
 
 .column3 {
