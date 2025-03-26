@@ -26,7 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Caption
         const caption = document.createElement("div");
         caption.classList.add("carousel-caption");
-        caption.textContent = publication.title;
+        
+         // Use innerHTML to include both title and author
+        caption.innerHTML = `${publication.title.replace(/\n/g, "<br>")}<br><span class="author-text"><em>${publication.author || ""}</em></span>`;
+        
 
         // Structure
         link.appendChild(imgWrapper);
@@ -53,41 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error("Error fetching publications:", error));
 });
 
- // Fetch and display latest post
-async function loadLatestPost() {
-  try {
-      const response = await fetch("updates.json"); // Fetch the JSON file
-      const data = await response.json();
-
-      // Ensure there are updates available
-      if (data.updates && data.updates.length > 0) {
-          const latestUpdate = data.updates[0]; // Get the first update
-
-          const latestPostContainer = document.getElementById("latest-post");
-          if (!latestUpdate.title) {
-              latestPostContainer.innerHTML = "<p>Latest update has no title.</p>";
-              return;
-          }
-
-          // Build the HTML structure dynamically
-          let html = `
-              <h2>${latestUpdate.title}</h2>
-              <p>${latestUpdate.copy || "No description available."}</p>
-          `;
-
-          if (latestUpdate.images.length > 0) {
-              html += `<img src="${latestUpdate.images[0]}" alt="Latest update image" style="max-width:100%;">`;
-          }
-
-          latestPostContainer.innerHTML = html;
-      } else {
-          document.getElementById("latest-post").innerHTML = "<p>No updates found.</p>";
-      }
-  } catch (error) {
-      console.error("Error loading latest update:", error);
-      document.getElementById("latest-post").innerHTML = "<p>Failed to load update.</p>";
-  }
-}
 
 async function fetchFooter(){
   fetch("footer.html")
@@ -96,5 +64,4 @@ async function fetchFooter(){
       .catch(error => console.error("Error loading footer:", error));
 }
 
-document.addEventListener("DOMContentLoaded", loadLatestPost);
 document.addEventListener("DOMContentLoaded", fetchFooter);

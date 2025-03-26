@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       publications.forEach((publication) => {
         const link = document.createElement("a");
         link.href = `?id=${publication.id}`; // Ensure the publication ID is passed in the URL
-        link.innerHTML = publication.title + "<br>" + publication.author;
+        link.innerHTML = `${publication.title.replace(/\n/g, "<br>")}<br><span class="author-text"><em>${publication.author || ""}</em></span>`;
         
         link.setAttribute("data-id", publication.id);
 
@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Highlight the publication if it matches the ID in the URL
         if (publicationIdFromURL && publicationIdFromURL == publication.id) {
-          link.style.fontWeight = "bold";
-          link.innerHTML = publication.title + "<br>" + publication.author + " ●"; // Add the circle to selected publication
+          link.style.backgroundColor = "orange"; // Or any color you prefer
+          link.innerHTML = `${publication.title.replace(/\n/g, "<br>")}<br><span class="author-text"><em>${publication.author || ""}</em></span><br>●`;
           selectedLink = link; // Mark this link as selected
 
           // Populate content immediately when the page loads
@@ -50,13 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
           if (selectedLink) {
             selectedLink.style.fontWeight = "";
             selectedLink.style.backgroundColor = "";
-            selectedLink.innerHTML = selectedLink.innerHTML.replace(" ●", "");
+            selectedLink.innerHTML = selectedLink.innerHTML.replace("●", "");
           }
 
           // Apply bold and append the circle to the clicked link
-          link.style.fontWeight = "bold";
+          
           link.style.backgroundColor = "orange"; // Or any color you prefer
-          link.innerHTML= publication.title  + "<br>" + publication.author + " ●";
+          link.innerHTML = `${publication.title.replace(/\n/g, "<br>")}<br><span class="author-text"><em>${publication.author || ""}</em></span><br>●`;
           selectedLink = link; // Update selected link
 
           const publicationId = event.target.getAttribute("data-id");
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <p>${publicationData.specs.language}</p>
       <p>${publicationData.specs.pages}</p>
       <p>${publicationData.specs.physical}</p>
-      <p>ISBN: ${publicationData.specs.ISBN}</p>
+      <p>${publicationData.specs.ISBN}</p>
     `;
 
     // Spread images container

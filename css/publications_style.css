@@ -25,9 +25,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
+
 
 ul {
   list-style: none;
@@ -57,7 +55,7 @@ body.publications-page .header {
   top: 0;
   left: 0;
   width: 100%;
-  background: #9bc7ec;
+  background: #b6c7d9;
   z-index: 10;
 }
 
@@ -184,9 +182,7 @@ body.publications-page .menu a:hover {
   transition: all 0.3s ease;
 }
 
-#publication-list li a:hover {
-  text-decoration: underline;
-}
+
 
 /* Divider */
 .divider {

@@ -57,18 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 captions.push(...update.captions);
             });
 
-            // Start the image rotation
-            startImageRotation();
-
-            // Set up click event to change image immediately and reset timer
-            fadeImage.addEventListener("click", () => {
-                changeImage();
-                resetImageRotation(); // Reset the timer on click
-            });
+                     
         })
-        .catch(error => console.error("Error loading updates:", error));
-
-      
+             
 
     document.getElementById("Dates").addEventListener("click", (event) => {
         let header = event.target.closest(".event-header");
@@ -88,35 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         icon.style.transform = schedule.classList.contains("hidden") ? "rotate(0deg)" : "rotate(180deg)";
     });
 
-    function startImageRotation() {
-        interval = setInterval(changeImage, 6000); // Change image every 5 seconds
-        changeImage(); // Show the first image immediately
-    }
-
-    function resetImageRotation() {
-        clearInterval(interval); // Clear the existing interval
-        startImageRotation(); // Restart the image rotation
-    }
-
-    function changeImage() {
-        if (images.length === 0) return; // No images to show
-
-        // Fade out the current image
-        fadeImage.style.opacity = 0;
-
-        // Wait for the fade-out transition to complete
-        setTimeout(() => {
-            // Update the image and caption
-            fadeImage.src = images[currentIndex];
-            imageCaption.innerHTML = captions[currentIndex];
-
-            // Fade in the new image
-            fadeImage.style.opacity = 1;
-
-            // Update the index for the next image
-            currentIndex = (currentIndex + 1) % images.length; // Loop back to the start
-        }, 300); // Match this with the transition duration
-    }
+        
 });
 
 function getRandomArrow() {
@@ -125,27 +88,3 @@ function getRandomArrow() {
     return `assets/SVG/droparrow_${randomVariant}.svg`;
 }
 
-let images = [];
-let currentIndex = 0;
-const imageElement = document.getElementById("clickableImage");
-
-// Fetch JSON data and extract images
-fetch('images.json')
-    .then(response => response.json())
-    .then(data => {
-        if (data.updates && data.updates.length > 0 && data.updates[0].images) {
-            images = data.updates[0].images; // Extract images from first update
-            if (images.length > 0) {
-                imageElement.src = images[0]; // Set first image
-            }
-        }
-    })
-    .catch(error => console.error('Error loading images:', error));
-
-// Change image on click
-imageElement.addEventListener("click", function () {
-    if (images.length === 0) return; // Ensure images are loaded
-
-    currentIndex = (currentIndex + 1) % images.length; // Cycle through images
-    this.src = images[currentIndex];    
-});

@@ -22,7 +22,7 @@ body {
   font-family: "neue-haas-unica", sans-serif;
   font-weight: 100;
   letter-spacing: -0.025em;
-  background-color: #9bc7ec;
+  background-color: #f5f0b8;
 }
 
 h2 {
@@ -39,7 +39,7 @@ h2 {
 /* ---------------- Header Styles ---------------- */
 
 .header {
-  background-color: #9bc7ec;
+  background-color: #b6c7d9;
   position: fixed;
   top: 0;
   display: flex;
@@ -47,7 +47,7 @@ h2 {
   height: 80px;
   width: 100%;
   z-index: 10;
-  box-shadow: 0 0 0.8rem 0.8rem #9BC7EC;
+  box-shadow: 0 0 0.8rem 0.8rem #b6c7d9;
 }
 
 .header-content {
@@ -174,7 +174,7 @@ h2 {
 /* Image wrapper ensures fixed size without distortion */
 .carousel-img-wrapper {
   width: 100%;
-  height: 80%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -199,10 +199,13 @@ h2 {
   text-align: center;
   color: #000000;
   background: none;
-  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
+  margin: 20px 0 0;
+}
+
+.author-text{
+  font-size: 0.9rem;
 }
 
 /* Arrows */
@@ -306,7 +309,7 @@ footer {
   padding: 0; /* Reset padding */
   width: 100%; /* Ensure it stretches fully */
   z-index: 9;
-  box-shadow: 0 -0.8rem 0.8rem #9BC7EC;
+  box-shadow: 0 -0.8rem 0.8rem #f5f0b8;
   
 }
 
