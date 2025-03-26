@@ -169,7 +169,7 @@ body.publications-page .menu a:hover {
   padding-top: 50px;
   box-sizing: border-box;
   overflow-y: auto;
-  
+
 }
 
 /* Updated list item styles */
@@ -314,17 +314,17 @@ body.publications-page .menu a:hover {
 /* ======================= */
 /*      RESPONSIVE         */
 /* ======================= */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .pub-wrapper {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    height: auto;
   }
 
   .publications-list {
     width: 100%;
+    position: relative;
     height: auto;
-    border-right: none;
-    border-bottom: 1px solid #ccc;
-    order:0;
+    padding-top: 20px;
   }
 
   .divider {
@@ -333,6 +333,7 @@ body.publications-page .menu a:hover {
 
   .publication-content {
     width: 100%;
-    order: -1;
+    max-width: 100%;
+    padding: 15px;
   }
 }

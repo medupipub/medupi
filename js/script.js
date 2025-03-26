@@ -1,101 +1,60 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const swiperWrapper = document.getElementById("swiper-wrapper");
-
-  function formatText(text) {
-    return text
-        .replace(/\n/g, "<br>") // Convert newlines to <br>
-        .replace(/\*([^*]+)\*/g, "<i>$1</i>") // Convert *italic* to <i>italic</i>
-        .replace(/([\w.-]+@[\w.-]+\.\w+)/g, '<a href="mailto:$1">$1</a>'); // Convert emails to mailto links
-}
-
-
+  const glideWrapper = document.getElementById("glide-wrapper");
 
   fetch("publications.json")
     .then((response) => response.json())
     .then((publications) => {
       publications.forEach((publication) => {
-        // Create the swiper-slide div
-        const swiperSlide = document.createElement("div");
-        swiperSlide.classList.add("swiper-slide");
+        const glideSlide = document.createElement("li");
+        glideSlide.classList.add("glide__slide");
 
-        // Create the link (<a>) element
         const link = document.createElement("a");
-        link.href = `/publications/${publication.id}`; // Using dynamic ID
+        link.href = `/publications.html?id=${publication.id}`;
         link.classList.add("carousel-item");
-        link.setAttribute("data-id", publication.id);
 
-        // Create the image (<img>) element
+        // Image container
+        const imgWrapper = document.createElement("div");
+        imgWrapper.classList.add("carousel-img-wrapper");
+
         const img = document.createElement("img");
-        img.src = publication.frontcover || "assets/default_cover.jpg"; // Use a default image if cover_photo is missing
-        img.alt = "Book Cover";
+        img.src = publication.frontcover || "assets/default_cover.jpg";
+        img.alt = publication.title;
+        img.classList.add("carousel-img");
 
-        // Create the caption container (<div>) element
-const captionContainer = document.createElement("div");
-captionContainer.classList.add("carousel-caption");
+        imgWrapper.appendChild(img);
 
-// Create the title (<div>) element
-const title = document.createElement("div");
-title.classList.add("carousel-title");
-title.textContent = publication.title;
+        // Caption
+        const caption = document.createElement("div");
+        caption.classList.add("carousel-caption");
+        caption.textContent = publication.title;
 
-// Create the author (<div>) element
-const author = document.createElement("div");
-author.classList.add("carousel-author");
-author.textContent = publication.author;
-
-       // Append title and author to captionContainer
-captionContainer.appendChild(title);
-captionContainer.appendChild(author);
-
-// Then apply it to your title and author:
-title.innerHTML = formatText(publication.title);
-author.innerHTML = formatText(publication.author);
-
-// Assemble the elements
-link.appendChild(img);
-link.appendChild(captionContainer);
-swiperSlide.appendChild(link);
-swiperWrapper.appendChild(swiperSlide);
+        // Structure
+        link.appendChild(imgWrapper);
+        link.appendChild(caption);
+        glideSlide.appendChild(link);
+        glideWrapper.appendChild(glideSlide);
       });
 
-      // **Check if Swiper is available before initializing**
-      if (typeof Swiper !== "undefined") {
-        const swiper = new Swiper(".swiper-container", {
-          slidesPerView: "auto",
-          spaceBetween: 75,
-          loop: true,
-          centeredSlides: false,
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+      // Initialize Glide.js
+      new Glide(".glide", {
+        type: "carousel",
+        perView: window.innerWidth < 768 ? 1 : 3,
+        focusAt: "center",
+        gap: 20,
+        breakpoints: {
+          768: {
+            perView: 1,
+            focusAt: "center",
+            gap: 10,
           },
-        });
-      } else {
-        console.error("Swiper failed to load.");
-      }
-
-      // Event listener for carousel items
-      const carouselItems = document.querySelectorAll(".carousel-item");
-      carouselItems.forEach((item) => {
-        item.addEventListener("click", function (event) {
-          event.preventDefault(); // Prevent the default link behavior
-          const publicationId = item.getAttribute("data-id");
-          window.location.href = `publications.html?id=${publicationId}`; // Pass ID in URL
-        });
-      });
+        },
+      }).mount();
     })
     .catch((error) => console.error("Error fetching publications:", error));
-
-
-
-  fetch("footer.html")
-      .then(response => response.text())
-      .then(data => document.getElementById("footer-container").innerHTML = data)
-      .catch(error => console.error("Error loading footer:", error));
-
+});
 
  // Fetch and display latest post
- async function loadLatestPost() {
+async function loadLatestPost() {
   try {
       const response = await fetch("updates.json"); // Fetch the JSON file
       const data = await response.json();
@@ -120,8 +79,6 @@ swiperWrapper.appendChild(swiperSlide);
               html += `<img src="${latestUpdate.images[0]}" alt="Latest update image" style="max-width:100%;">`;
           }
 
-          html += `<a href="updates.html">Read more</a>`;
-
           latestPostContainer.innerHTML = html;
       } else {
           document.getElementById("latest-post").innerHTML = "<p>No updates found.</p>";
@@ -132,6 +89,12 @@ swiperWrapper.appendChild(swiperSlide);
   }
 }
 
-document.addEventListener("DOMContentLoaded", loadLatestPost);
+async function fetchFooter(){
+  fetch("footer.html")
+      .then(response => response.text())
+      .then(data => document.getElementById("footer-container").innerHTML = data)
+      .catch(error => console.error("Error loading footer:", error));
+}
 
-});
+document.addEventListener("DOMContentLoaded", loadLatestPost);
+document.addEventListener("DOMContentLoaded", fetchFooter);
