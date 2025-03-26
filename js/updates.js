@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="event-data">
                                 <h3>${event.date}</h3>
                                 <h3>${event.venue}</h3>
-                                <h3>${event.address || "TBA"}</h3>
+                                <h3>${event.address || ""}</h3>
                                 <div class="schedule hidden">
                                     ${event.schedule.map(slot => `
                                         <p><strong>${slot.time || ""}</strong><br> ${formatText(slot.events.join(", "))}</p>

@@ -43,7 +43,7 @@
                 {
                     "date": "Tue 01 April 2025",
                     "venue": "Ivana Franke Studio, Berlin",
-                    "address": "Stendaler Str. 5, 10559 Berlin",
+                    "address": "",
                     "schedule": [
                                     {
                                     "time": "",
@@ -70,12 +70,25 @@
                 {
                     "date": "Thu 01 May 2025",
                     "venue": "Molalatladi, Johannesburg",
-                    "address": "",
+                    "address": "11 Alexander Street, Ferreiras Dorp, Johannesburg, 2048",
                     "schedule": [
                                     {
                                     "time": "18h30",
                                     "events": [
-                                        "In conversation with Kabelo Malatsie and Rohit Jain"
+                                        "a gathering and conversation with Nolan Oswald Dennis and Kabelo Malatsie"
+                                    ]
+                                }
+                            ]
+                },
+                {
+                    "date": "Thu 08 May 2025",
+                    "venue": "defunct context, u406 pavilion, Cape Town",
+                    "address": "Hiddingh Campus, 37 Orange St, Gardens, Cape Town, 8001",
+                    "schedule": [
+                                    {
+                                    "time": "18h30",
+                                    "events": [
+                                        "A gathering and conversation with George Mahashe and Kabelo Malatsie."
                                     ]
                                 }
                             ]
