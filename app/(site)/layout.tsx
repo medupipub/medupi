@@ -6,6 +6,11 @@ import Header from '@/components/Header';
 export const metadata: Metadata = {
   title: "medupi",
   description: "medupi is a rehearsal of freedom, a house of collective study, a taking in of breath into bodies - celestial and more.",
+ icons: {
+    icon: "/favicon.ico", // or "/favicon.ico"
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default async function RootLayout({
@@ -20,7 +25,6 @@ export default async function RootLayout({
       <head>
         {/* Adobe Fonts stylesheet link */}
         <link rel="stylesheet" href="https://use.typekit.net/pmr0alv.css" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         {/* Header */}
