@@ -2,9 +2,15 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { EventDate } from '@/types/Announcement';
 
-export default function EventBlock({ event }: { event: any }) {
-    const [open, setOpen] = useState(false);
+
+type Props = {
+  event: EventDate;
+};
+
+export default function EventBlock({ event }: Props) {
+  const [open, setOpen] = useState(false);
 
     return (
         <div id="event-block">

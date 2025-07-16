@@ -5,6 +5,7 @@ import Link from "next/link";
 import PublicationTitle from "@/components/PublicationTitle";
 import ColophonSection from "@/components/ColophonSection";
 import Footer from "@/components/Footer";
+import type { Publication } from "@/types/Publication";
 
 type Props = {
   params: { publication: string };
@@ -47,7 +48,7 @@ export default async function Publication({ params }: Props) {
             </p>
 
             <ul className="flex md:flex-col flex-row md:space-y-2 space-x-4 md:space-x-0">
-              {publications.map((publication: any) => (
+              {publications.map((publication: Publication) => (
                 <li
                   key={publication._id}
                   className="publication-item font-oso font-medium leading-[1.1] text-[1em] p-[10px] shrink-0 md:w-auto w-[200px]"

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { PortableText } from '@portabletext/react';
+import { PortableTextBlock } from "sanity";
 
 declare global {
   interface Window {
@@ -10,7 +11,7 @@ declare global {
 }
 
 type Props = {
-  stock: any;
+  stock: PortableTextBlock[];
   specs: {
     year: string;
     language: string;

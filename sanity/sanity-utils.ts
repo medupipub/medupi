@@ -4,11 +4,12 @@ import clientConfig from "./schemas/config/client-config";
 import { Page } from "@/types/Page";
 import { Announcement } from "@/types/Announcement";
 import { marked } from 'marked'
+import { PortableTextBlock } from "sanity";
 
 
 export async function getPublications(): Promise<Publication[]> {
   try {
-    const publications = await createClient(clientConfig).fetch(
+    const publications = await createClient(clientConfig).fetch<Publication[]>(
       groq`*[_type == "publication"] | order(sortOrder desc) {
         _id,
         _createdAt,
@@ -32,11 +33,10 @@ export async function getPublications(): Promise<Publication[]> {
       }`
     );
 
-    // Fallback in case something goes wrong and `publications` is null
     return publications ?? [];
   } catch (error) {
     console.error("Failed to fetch publications:", error);
-    return []; // Prevents crash from null
+    return [];
   }
 }
 
