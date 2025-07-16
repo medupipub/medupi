@@ -7,12 +7,14 @@ import Footer from "@/components/Footer";
 export default async function Page({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const page = await getPage(params.slug);
+  // Await the params Promise
+  const { slug } = await params;
+  const page = await getPage(slug);
 
   // Special layout for the About page
-  if (params.slug === "about") {
+  if (slug === "about") {
     return (
       <div>
         <section
