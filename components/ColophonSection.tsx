@@ -4,9 +4,15 @@ import { useEffect, useState } from 'react';
 import { PortableText } from '@portabletext/react';
 import { PortableTextBlock } from "sanity";
 
+// ❗ Safer: declare ShopifyBuy with minimal known shape
 declare global {
   interface Window {
-    ShopifyBuy?: any;
+    ShopifyBuy?: {
+      buildClient: (...args: any[]) => any; // keep loose here
+      UI: {
+        onReady: (client: any) => Promise<any>;
+      };
+    };
   }
 }
 
@@ -26,18 +32,16 @@ export default function ColophonSection({ stock, specs, shopifyProductId }: Prop
   const [isOpen, setIsOpen] = useState(false);
   const componentId = `product-component-${shopifyProductId}`;
 
-  // Dynamically load Shopify Buy Button script once, then init
   useEffect(() => {
     if (isOpen && shopifyProductId) {
-      console.log("Initializing Shopify Buy Button for", shopifyProductId);
-
       const ShopifyBuyInit = () => {
-        const client = window.ShopifyBuy.buildClient({
+        const client = window.ShopifyBuy!.buildClient({
           domain: 'medupipublishing.myshopify.com',
           storefrontAccessToken: '44310749608f0ba7d9a680364c7135e4',
         });
 
-        window.ShopifyBuy.UI.onReady(client).then((ui: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        window.ShopifyBuy!.UI.onReady(client).then((ui: any) => {
           if (!document.getElementById(componentId)?.hasChildNodes()) {
             ui.createComponent("product", {
               id: shopifyProductId,
@@ -48,19 +52,17 @@ export default function ColophonSection({ stock, specs, shopifyProductId }: Prop
                   buttonDestination: "cart",
                   text: { button: "Add to cart" },
                   styles: {
-                    product: {
-                      "text-align": "left",
-                    },
+                    product: { "text-align": "left" },
                     title: {
                       color: "#000000",
                       "font-family": "Unica One, sans-serif",
                       "font-size": "1.1rem",
                       "font-weight": "normal",
                       "letter-spacing": "-0.5px",
-                      "text-align": "left", // ensures title is left-aligned
+                      "text-align": "left",
                     },
                     price: {
-                      "text-align": "left", // aligns price
+                      "text-align": "left",
                       color: "#000000",
                     },
                     button: {
@@ -68,7 +70,7 @@ export default function ColophonSection({ stock, specs, shopifyProductId }: Prop
                       "background-color": "#c1c1f3",
                       ":hover": { "background-color": "#ddb0ad" },
                       ":focus": { "background-color": "#ddb0ad" },
-                      "text-align": "left", // aligns button text
+                      "text-align": "left",
                     },
                   },
                 },
@@ -117,11 +119,11 @@ export default function ColophonSection({ stock, specs, shopifyProductId }: Prop
         }
       };
 
-      // ✅ Now this is correctly placed inside the effect
       loadShopify();
     }
-  }, [isOpen, shopifyProductId]);
 
+    // ✅ Add componentId to the deps
+  }, [isOpen, shopifyProductId, componentId]);
 
   return (
     <div className="mt-5">
@@ -130,26 +132,27 @@ export default function ColophonSection({ stock, specs, shopifyProductId }: Prop
         className="text-left w-full font-unica text-lg tracking-tight relative z-[2] hover:underline focus:outline-none"
       >
         <span className="flex items-center gap-2">
-  <span className="transition-transform duration-300 transform" style={{ display: "inline-block" }}>
-    <svg
-      className={`w-4 h-4 transition-transform duration-300 ${
-        isOpen ? "rotate-180" : "rotate-0"
-      }`}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-    </svg>
-  </span>
-  <span className="font-oso font-bold leading-[0.9] relative z-[2] text-[1.1em] text-left">Colophon and Stockists</span>
-</span>
+          <span className="transition-transform duration-300 transform" style={{ display: "inline-block" }}>
+            <svg
+              className={`w-4 h-4 transition-transform duration-300 ${
+                isOpen ? "rotate-180" : "rotate-0"
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+          <span className="font-oso font-bold leading-[0.9] relative z-[2] text-[1.1em] text-left">
+            Colophon and Stockists
+          </span>
+        </span>
       </button>
 
       {isOpen && (
         <div className="mt-4 space-y-6">
-
           {/* Specs */}
           <div className="space-y-1 text-bs">
             <div><strong>Year:</strong> {specs.year}</div>
@@ -168,14 +171,12 @@ export default function ColophonSection({ stock, specs, shopifyProductId }: Prop
           )}
 
           {/* Shopify Buy Button */}
-
           {shopifyProductId && (
             <div>
               <strong> Available Online: </strong>
               <div id={componentId} className="shopify-buy-button mt-4" />
             </div>
           )}
-
         </div>
       )}
     </div>
