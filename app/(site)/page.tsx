@@ -8,7 +8,6 @@ import Link from 'next/link';
 import EventBlock from '@/components/EventDropdown';
 
 import PublicationCarousel from '@/components/PublicationsCarousel';
-import PublicationsCarousel from '@/components/PublicationsCarousel';
 import Footer from '@/components/Footer';
 
 
@@ -18,9 +17,9 @@ export default async function Home() {
   const pages = await getPages();
   const aboutPage = pages.find((page) => page.slug === 'about');
 
-if (!aboutPage) {
-  return <div>About page not found</div>;
-}
+  if (!aboutPage) {
+    return <div>About page not found</div>;
+  }
 
 
   const now = new Date();
@@ -82,21 +81,25 @@ if (!aboutPage) {
 
                 {/* Divider */}
                 {/* Vertical divider for md+ screens */}
-                <img
+                <Image
                   id="vert-divider"
                   className="hidden md:block py-[50px] mt-[100px] ml-[80px] w-[5%] max-h-[650px]"
                   src="/SVG/line_vert.svg"
                   alt="Vertical Divider"
+                  width="40"
+                  height="650"
                 />
 
                 {/* Horizontal divider for small screens */}
-                <img
+                <Image
                   id="horiz-divider"
                   className="block md:hidden py-[50px] mx-auto my-4 w-full max-w-[650px] h-auto"
                   src="/SVG/line_horiz.svg"
                   alt=""
                   aria-hidden="true"
                   role="presentation"
+                  width="40"
+                  height="650"
                 />
 
                 {/* Column B */}
@@ -157,37 +160,37 @@ if (!aboutPage) {
         </div>
       </section>
 
-     <section id="about-section" className="flex flex-col md:flex-row bg-[#c1c1f3] w-full p-[20px] min-h-[600px] relative shadow-[0_0_0.8rem_0.8rem_#c1c1f3]">
-  {/* Sidebar */}
-  <div id="section-sidebar" className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl w-full md:w-[20%] max-w-[200px] p-2.5 pt-12">
-    <Link href="/about">
-      <p className="md:text-[clamp(1rem,2vw,1.5rem)]">About</p>
-    </Link>
-  </div>
+      <section id="about-section" className="flex flex-col md:flex-row bg-[#c1c1f3] w-full p-[20px] min-h-[600px] relative shadow-[0_0_0.8rem_0.8rem_#c1c1f3]">
+        {/* Sidebar */}
+        <div id="section-sidebar" className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl w-full md:w-[20%] max-w-[200px] p-2.5 pt-12">
+          <Link href="/about">
+            <p className="md:text-[clamp(1rem,2vw,1.5rem)]">About</p>
+          </Link>
+        </div>
 
-  {/* Main Content */}
-  <div id="section-main" className="w-full md:w-[80%] p-[20px] flex flex-col justify-center items-center">
-    <div className="w-full flex flex-col md:flex-row justify-between items-start gap-[40px] p-[20px]">
-      {/* Column A */}
-      <div id="columnA" className="w-full md:w-[50%] m-[5px]">
-        <PortableText value={aboutPage.columnA} />
-      </div>
+        {/* Main Content */}
+        <div id="section-main" className="w-full md:w-[80%] p-[20px] flex flex-col justify-center items-center">
+          <div className="w-full flex flex-col md:flex-row justify-between items-start gap-[40px] p-[20px]">
+            {/* Column A */}
+            <div id="columnA" className="w-full md:w-[50%] m-[5px]">
+              <PortableText value={aboutPage.columnA} />
+            </div>
 
-      {/* Column B */}
-      <div id="columnB" className="w-full md:w-[50%] m-[5px]">
-        <PortableText value={aboutPage.columnB} />
-      </div>
-    </div>
+            {/* Column B */}
+            <div id="columnB" className="w-full md:w-[50%] m-[5px]">
+              <PortableText value={aboutPage.columnB} />
+            </div>
+          </div>
 
-    {/* Contact info */}
-    <div className="w-full text-center pt-[40px] px-[20px]">
-      <PortableText value={aboutPage.contactInfo} />
-    </div>
-  </div>
-</section>
+          {/* Contact info */}
+          <div className="w-full text-center pt-[40px] px-[20px]">
+            <PortableText value={aboutPage.contactInfo} />
+          </div>
+        </div>
+      </section>
 
 
-   <Footer />
+      <Footer />
     </div>
 
 

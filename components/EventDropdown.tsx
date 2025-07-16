@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function EventBlock({ event }: { event: any }) {
     const [open, setOpen] = useState(false);
@@ -35,13 +36,15 @@ export default function EventBlock({ event }: { event: any }) {
                             className="pointer-events-auto cursor-pointer flex justify-center items-center"
                             onClick={() => setOpen(true)}
                         >
-                            <img
+                            <Image
                                 id="dropdown-icon"
                                 className={`w-[1.5em] h-auto transition-transform duration-300 ease-in-out ${
                                     open ? 'rotate-180' : 'rotate-0'
                                 }`}
                                 src="/SVG/droparrow_D03.svg"
                                 alt="Dropdown"
+                                width="20"
+                                height="20"
                             />
                         </div>
                     )}
@@ -65,7 +68,7 @@ export default function EventBlock({ event }: { event: any }) {
                             className="pointer-events-auto cursor-pointer flex justify-center items-center mt-2"
                             onClick={() => setOpen(false)}
                         >
-                            <img
+                            <Image
                                 id="dropdown-icon"
                                 className={`w-[1.5em] h-auto transition-transform duration-300 ease-in-out ${
                                     open ? 'rotate-180' : 'rotate-0'

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Footer() {
   return (
      <footer className="w-full bg-[#f5f0b8] pt-[80px] pb-12 shadow-[0_0_0.8rem_0.8rem_#f5f0b8]">
@@ -55,11 +57,13 @@ export default function Footer() {
 
             {/* Star Image */}
             <div className="flex justify-center">
-              <img
+              <Image
                 src="/SVG/Star.svg"
                 id="footer-star"
                 alt="Star"
                 className="w-[200px] md:w-[250px] h-auto"
+                width="250"
+                height="200"
               />
             </div>
 

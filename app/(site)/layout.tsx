@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import Link from "next/link";
 import { getPages } from "@/sanity/sanity-utils";
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: "medupi",

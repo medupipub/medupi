@@ -5,7 +5,6 @@ import Glide from '@glidejs/glide'
 import { Publication } from '@/types/Publication'
 import Link from 'next/link';
 import Image from 'next/image'
-import PublicationTitle from '@/components/PublicationTitle'
 
 type Props = {
     publications: Publication[]
@@ -92,10 +91,12 @@ export default function PublicationCarousel({ publications }: Props) {
                     data-glide-dir="<"
                     disabled={!glideMounted}
                 >
-                    <img
+                    <Image
                         src="/SVG/CarArrow_L.svg"
                         alt="Previous"
                         className="w-7 h-7 sm:w-10 sm:h-10 md:w-14 md:h-14"
+                        width={20}
+                        height={20}
                     />
                 </button>
                 <button
@@ -103,10 +104,12 @@ export default function PublicationCarousel({ publications }: Props) {
                     data-glide-dir=">"
                     disabled={!glideMounted}
                 >
-                    <img
+                    <Image
                         src="/SVG/CarArrow_R.svg"
                         alt="Next"
                         className="w-7 h-7 sm:w-10 sm:h-10 md:w-14 md:h-14"
+                        width={20}
+                        height={20}
                     />
                 </button>
             </div>

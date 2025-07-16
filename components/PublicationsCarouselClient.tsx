@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Glide from "@glidejs/glide";
 import styles from "./PublicationsCarousel.module.css";
 import { Publication } from "@/types/Publication";
+import Image from 'next/image';
 
 type Props = {
     publications: Publication[];
@@ -35,7 +36,7 @@ export default function PublicationsCarouselClient({ publications }: Props) {
                         <li key={pub._id} className="glide__slide">
                             <a href={`/publications/${pub.slug}`} className={styles.carouselItem}>
                                 <div className={styles.imgWrapper}>
-                                    <img
+                                    <Image
                                         src={pub.frontcover || "/assets/default_cover.jpg"}
                                         alt={pub.alt || pub.title}
                                         className={styles.carouselImg}
@@ -62,10 +63,10 @@ export default function PublicationsCarouselClient({ publications }: Props) {
             {/* Arrows */}
             <div className="glide__arrows" data-glide-el="controls">
                 <button className="glide__arrow glide__arrow--left" data-glide-dir="<">
-                    <img src="/assets/SVG/CarArrow_L.svg" alt="Previous" />
+                    <Image src="/assets/SVG/CarArrow_L.svg" alt="Previous" />
                 </button>
                 <button className="glide__arrow glide__arrow--right" data-glide-dir=">">
-                    <img src="/assets/SVG/CarArrow_R.svg" alt="Next" />
+                    <Image src="/assets/SVG/CarArrow_R.svg" alt="Next" />
                 </button>
             </div>
         </div>

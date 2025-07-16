@@ -85,20 +85,15 @@ export default async function AnnouncementsPage() {
                     </div>
 
                     {/* Divider */}
-                    <img
+                    <Image
                         id="vert-divider"
                         className="hidden md:block py-[50px] mt-[100px] ml-[80px] w-[5%] max-h-[650px]"
                         src="/SVG/line_vert.svg"
                         alt="Vertical Divider"
+                        width="39"
+                        height="650"
                     />
-                    <img
-                        id="horiz-divider"
-                        className="block md:hidden py-[50px] mx-auto my-4 w-full max-w-[650px] h-auto"
-                        src="/SVG/line_horiz.svg"
-                        alt=""
-                        aria-hidden="true"
-                        role="presentation"
-                    />
+                    
 
                     {/* Column B: Dates */}
                     <div id="announcements-columnB" className="w-full md:w-[30%] p-[30px]">

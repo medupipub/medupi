@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Page {
   _id: string;
@@ -37,16 +38,20 @@ export default function Header({ pages }: { pages: Page[] }) {
           <Link href="/">
             <div className="flex items-center gap-2">
                 {showLogoSvg && (
-                <img
+                <Image
                   src="/SVG/Arrow_L.svg"
                   alt="Custom SVG"
                   className="h-12 w-12 mr-[20px]"
+                  width="45"
+                  height="42"
                 />
               )}
-              <img
+              <Image
                 src="/medupi_logo.png"
                 alt="Medupi Logo"
                 className="h-13 w-auto"
+                width="135"
+                height="50"
               />
               
             </div>
@@ -59,12 +64,14 @@ export default function Header({ pages }: { pages: Page[] }) {
               className="z-30 w-10 h-10 flex items-center justify-center"
               aria-label="Toggle menu"
             >
-              <img
+              <Image
                 src={menuOpen ? '/SVG/CarArrow_R.svg' : '/SVG/burger.svg'}
                 alt="Menu Icon"
                 className={`h-8 w-8 transition-transform duration-300 ${
                   menuOpen ? 'md:rotate-0 -rotate-90' : 'rotate-0'
                 }`}
+                width="50"
+                height="50"
               />
             </button>
 
