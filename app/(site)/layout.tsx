@@ -20,6 +20,7 @@ export default async function RootLayout({
       <head>
         {/* Adobe Fonts stylesheet link */}
         <link rel="stylesheet" href="https://use.typekit.net/pmr0alv.css" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         {/* Header */}
