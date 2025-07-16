@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { PortableText } from '@portabletext/react';
 import { PortableTextBlock } from "sanity";
 
-interface ShopifyBuyClient {}
+type ShopifyBuyClient = object;
+
 interface ShopifyBuyUI {
   onReady(client: ShopifyBuyClient): Promise<{
     createComponent: (...args: unknown[]) => void;
