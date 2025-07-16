@@ -8,11 +8,12 @@ import Footer from "@/components/Footer";
 import type { Publication } from "@/types/Publication";
 
 type Props = {
-  params: { publication: string };
+  params: Promise<{ publication: string }>;
 };
 
 export default async function Publication({ params }: Props) {
-  const slug = params.publication;
+  // Await the params Promise
+  const { publication: slug } = await params;
   const publication = await getPublication(slug);
   const publications = await getPublications();
 
@@ -134,4 +135,3 @@ export default async function Publication({ params }: Props) {
     </div>
   );
 }
-

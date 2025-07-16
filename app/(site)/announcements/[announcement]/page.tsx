@@ -5,20 +5,22 @@ import { PortableText } from '@portabletext/react';
 import { notFound } from 'next/navigation';
 
 type Props = {
-  params: { announcement: string };
+  params: Promise<{ announcement: string }>;
 };
 
 export default async function SingleAnnouncementPage({ params }: Props) {
-  const announcement = await getAnnouncement(params.announcement);
+  // Await the params Promise
+  const { announcement } = await params;
+  const announcementData = await getAnnouncement(announcement);
 
-  if (!announcement) return notFound();
+  if (!announcementData) return notFound();
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold">{announcement.title}</h1>
+      <h1 className="text-3xl font-bold">{announcementData.title}</h1>
 
       <div className="mt-6 prose">
-        <PortableText value={announcement.eventDescription} />
+        <PortableText value={announcementData.eventDescription} />
       </div>
     </div>
   );
