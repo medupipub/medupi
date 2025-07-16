@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@import "@glidejs/glide/dist/css/glide.core.min.css";
+
+
+.font-oso {
+    font-family: "oso-serif-variable", sans-serif;
+  }
+
+.font-unica{
+    font-family: "neue-haas-unica", sans-serif;
+  }
+
+
+* {
+    box-sizing: border-box;
+}
+
+::selection {
+    background: #ffb347;
+    color: #000000;
+  }
+
+html {
+  overflow-y: scroll;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+  font-family: "neue-haas-unica", sans-serif;
+  font-weight: 100;
+  letter-spacing: -0.025em;
+  /*background-color: #f5f0b8;*/
+}
+
+h2 {
+  font-family: "oso-serif-variable", sans-serif;
+  font-weight: 600;
+  /* font-stretch: 70%; */
+  line-height: 90%;
+  position: relative;
+  z-index: 2;
+  font-size: 2.8em;
+  }
+
+ 
