@@ -4,14 +4,18 @@ import { useEffect, useState } from 'react';
 import { PortableText } from '@portabletext/react';
 import { PortableTextBlock } from "sanity";
 
-// ❗ Safer: declare ShopifyBuy with minimal known shape
+interface ShopifyBuyClient {}
+interface ShopifyBuyUI {
+  onReady(client: ShopifyBuyClient): Promise<{
+    createComponent: (...args: unknown[]) => void;
+  }>;
+}
+
 declare global {
   interface Window {
     ShopifyBuy?: {
-      buildClient: (...args: any[]) => any; // keep loose here
-      UI: {
-        onReady: (client: any) => Promise<any>;
-      };
+      buildClient: (config: Record<string, unknown>) => ShopifyBuyClient;
+      UI: ShopifyBuyUI;
     };
   }
 }
