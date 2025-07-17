@@ -12,13 +12,16 @@
     "@glidejs/glide": "^3.7.1",
     "@portabletext/react": "^3.2.1",
     "@portabletext/types": "^2.0.13",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^3.99.0",
     "marked": "^16.0.0",
     "next": "15.3.1",
-    "next-sanity": "^9.10.2",
+    "next-sanity": "^9.12.3",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sanity": "^3.87.0"
+    "sanity": "^3.99.0",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
