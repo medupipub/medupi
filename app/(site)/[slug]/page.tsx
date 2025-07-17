@@ -4,6 +4,9 @@ import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 
+// Add this line - revalidate every 60 seconds
+export const revalidate = 60;
+
 export default async function Page({
   params,
 }: {

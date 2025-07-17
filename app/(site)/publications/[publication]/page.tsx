@@ -7,6 +7,9 @@ import ColophonSection from "@/components/ColophonSection";
 import Footer from "@/components/Footer";
 import type { Publication } from "@/types/Publication";
 
+// Add this line - revalidate every 60 seconds
+export const revalidate = 60;
+
 type Props = {
   params: Promise<{ publication: string }>;
 };

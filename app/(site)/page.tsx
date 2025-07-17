@@ -6,10 +6,12 @@ import '../../styles/style.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import EventBlock from '@/components/EventDropdown';
-
+import PublicationsLink from '@/components/PublicationsLink';
 import PublicationCarousel from '@/components/PublicationsCarousel';
 import Footer from '@/components/Footer';
 
+// Add this line - revalidate every 60 seconds
+export const revalidate = 60;
 
 export default async function Home() {
   const publications = await getPublications();
@@ -152,7 +154,8 @@ export default async function Home() {
 
         {/* Sidebar */}
         <div id="section-sidebar" className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl w-[20%] max-w-[200px] p-2.5 pt-12">
-          <Link href="/publications"><p className="md:text-[clamp(1rem,2vw,1.5rem)]">Publications</p></Link>
+          {/*<Link href="<PublicationsLink />"><p className="md:text-[clamp(1rem,2vw,1.5rem)]">Publications</p></Link>*/}
+          <PublicationsLink />
 
         </div>
         <div id="section-main" className="w-[80%] p-[20px] flex flex-col justify-center items-center">
