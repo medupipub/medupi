@@ -4,6 +4,9 @@ import { getAnnouncement } from '@/sanity/sanity-utils';
 import { PortableText } from '@portabletext/react';
 import { notFound } from 'next/navigation';
 
+// Add this line - revalidate every 60 seconds
+export const revalidate = 60;
+
 type Props = {
   params: Promise<{ announcement: string }>;
 };
