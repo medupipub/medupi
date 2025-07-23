@@ -23,7 +23,6 @@ export default async function Home() {
     return <div>About page not found</div>;
   }
 
-
   const now = new Date();
   const activeAnnouncements = announcements.filter(
     (a) => a.validUntil && new Date(a.validUntil) > now
@@ -55,24 +54,35 @@ export default async function Home() {
                     <div key={announcement._id}>
                       <h2 className="text-[clamp(1.5em,4vw,3em)] py-7">{announcement.title}</h2>
 
-                      {announcement.images?.map((img, i) => (
-                        <div key={img} className="w-full relative mx-auto flex flex-col items-center">
-                          <div id="image-container" className="w-full">
-                            <Image
-                              src={img}
-                              alt={announcement.captions?.[i] || `Image ${i + 1}`}
-                              width={800}
-                              height={400}
-                            />
-                          </div>
-
-                          {announcement.captions?.[i] && (
-                            <div id="image-caption" className="w-full text-left italic mt-[10px] mb-[30px]">
-                              <p>{announcement.captions[i]}</p>
+                      {/* Updated images section with spacing and captions at end */}
+                      {announcement.images && announcement.images.length > 0 && (
+                        <div className="w-full space-y-4 mb-8">
+                          {announcement.images.map((img, i) => (
+                            <div
+                              key={img}
+                              className="w-full relative mx-auto flex flex-col items-center"
+                            >
+                              <div id="image-container" className="w-full">
+                                <Image
+                                  src={img}
+                                  alt={announcement.captions?.[i] || `Image ${i + 1}`}
+                                  width={800}
+                                  height={400}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                          
+                          {/* Captions at the end of all images */}
+                          {announcement.captions && announcement.captions.length > 0 && (
+                            <div className="w-full text-left italic mt-4">
+                              {announcement.captions.map((caption, i) => (
+                                <p key={i} className="mb-2">{caption}</p>
+                              ))}
                             </div>
                           )}
                         </div>
-                      ))}
+                      )}
 
                       <div id="event-copy">
                         <PortableText value={announcement.eventDescription} />
@@ -81,67 +91,70 @@ export default async function Home() {
                   ))}
                 </div>
 
-                {/* Divider */}
-                {/* Vertical divider for md+ screens */}
-                <Image
-                  id="vert-divider"
-                  className="hidden md:block py-[50px] mt-[100px] ml-[80px] w-[5%] max-h-[650px]"
-                  src="/SVG/line_vert.svg"
-                  alt="Vertical Divider"
-                  width="40"
-                  height="650"
-                />
+                {/* Conditional Divider - only show if any announcement has eventDates */}
+                {activeAnnouncements.some(announcement => announcement.eventDates && announcement.eventDates.length > 0) && (
+                  <>
+                    {/* Vertical divider for md+ screens */}
+                    <Image
+                      id="vert-divider"
+                      className="hidden md:block py-[50px] mt-[100px] ml-[80px] w-[5%] max-h-[650px]"
+                      src="/SVG/line_vert.svg"
+                      alt="Vertical Divider"
+                      width="40"
+                      height="650"
+                    />
 
-                {/* Horizontal divider for small screens */}
-                <Image
-                  id="horiz-divider"
-                  className="block md:hidden py-[50px] mx-auto my-4 w-full max-w-[650px] h-auto"
-                  src="/SVG/line_horiz.svg"
-                  alt=""
-                  aria-hidden="true"
-                  role="presentation"
-                  width="40"
-                  height="650"
-                />
+                    {/* Horizontal divider for small screens */}
+                    <Image
+                      id="horiz-divider"
+                      className="block md:hidden py-[50px] mx-auto my-4 w-full max-w-[650px] h-auto"
+                      src="/SVG/line_horiz.svg"
+                      alt=""
+                      aria-hidden="true"
+                      role="presentation"
+                      width="40"
+                      height="650"
+                    />
 
-                {/* Column B */}
-                <div id="announcements-columnB" className="w-full md:w-[30%] p-[30px]">
-                  <div id="Dates">
-                    <h2 className="text-center">Dates:</h2>
-                    {activeAnnouncements.map((announcement) => (
-                      <div key={announcement._id}>
-                        {(() => {
-                          const now = new Date();
+                    {/* Column B */}
+                    <div id="announcements-columnB" className="w-full md:w-[30%] p-[30px]">
+                      <div id="Dates">
+                        <h2 className="text-center">Dates:</h2>
+                        {activeAnnouncements.map((announcement) => (
+                          <div key={announcement._id}>
+                            {/* Only render dates if eventDates exists and has content */}
+                            {announcement.eventDates && announcement.eventDates.length > 0 && (() => {
+                              const now = new Date();
 
-                          const upcoming = announcement.eventDates
-                            .filter(e => new Date(e.date) >= now)
-                            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+                              const upcoming = announcement.eventDates
+                                .filter(e => new Date(e.date) >= now)
+                                .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-                          const past = announcement.eventDates
-                            .filter(e => new Date(e.date) < now)
-                            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+                              const past = announcement.eventDates
+                                .filter(e => new Date(e.date) < now)
+                                .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-                          const sortedEvents = [...upcoming, ...past];
+                              const sortedEvents = [...upcoming, ...past];
 
-                          return sortedEvents.map((event, i) => {
-                            const isPast = new Date(event.date) < now;
+                              return sortedEvents.map((event, i) => {
+                                const isPast = new Date(event.date) < now;
 
-                            return (
-                              <div
-                                key={i}
-                                className={`mb-4 transition-all duration-300 ${isPast ? 'opacity-50 grayscale' : ''}`}
-                              >
-                                <EventBlock event={event} />
-                              </div>
-                            );
-                          });
-                        })()}
-
-
+                                return (
+                                  <div
+                                    key={i}
+                                    className={`mb-4 transition-all duration-300 ${isPast ? 'opacity-50 grayscale' : ''}`}
+                                  >
+                                    <EventBlock event={event} />
+                                  </div>
+                                );
+                              });
+                            })()}
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
@@ -192,14 +205,7 @@ export default async function Home() {
         </div>
       </section>
 
-
       <Footer />
     </div>
-
-
   );
-
 }
-
-
-

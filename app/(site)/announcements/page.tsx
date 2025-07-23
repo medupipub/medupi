@@ -13,13 +13,13 @@ export default async function AnnouncementsPage() {
 
     const now = new Date();
 
-    // You may want to include past announcements too, so just sort all by validUntil or created date
+    // Sort announcements by validUntil date - most recently valid first
     const sortedAnnouncements = announcements
         .slice()
         .sort((a, b) => {
             const dateA = new Date(a.validUntil || a._createdAt);
             const dateB = new Date(b.validUntil || b._createdAt);
-            return dateB.getTime() - dateA.getTime();
+            return dateB.getTime() - dateA.getTime(); // Most recently valid first
         });
 
     return (
