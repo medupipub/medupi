@@ -34,7 +34,7 @@ export default async function AnnouncementsPage() {
                     className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl w-[20%] max-w-[200px] p-2.5 pt-12"
                 >
                     <Link href="/announcements">
-                        <p className="md:text-[clamp(1rem,2vw,1.5rem)]">Announcements Archive</p>
+                        <p className="md:text-[clamp(1rem,2vw,1.5rem)]">Archive</p>
                     </Link>
                 </div>
 

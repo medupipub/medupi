@@ -99,7 +99,7 @@ export default function Header({ pages }: { pages: Page[] }) {
                 Publications
               </Link>
               <Link href="/announcements" className="hover:underline whitespace-nowrap">
-                Announcements
+                Archive
               </Link>
             </div>
           </div>
@@ -134,7 +134,7 @@ export default function Header({ pages }: { pages: Page[] }) {
               onClick={() => setMenuOpen(false)}
               className="hover:underline whitespace-nowrap"
             >
-              Announcements
+              Archive
             </Link>
           </div>
         </div>
