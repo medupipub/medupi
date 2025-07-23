@@ -64,83 +64,93 @@ export default async function AnnouncementsPage() {
                                             {announcement.title}
                                         </h2>
 
-                                        {announcement.images?.map((img, i) => (
-                                            <div
-                                                key={img}
-                                                className="w-full relative mx-auto flex flex-col items-center"
-                                            >
-                                                <div id="image-container" className="w-full">
-                                                    <Image
-                                                        src={img}
-                                                        alt={announcement.captions?.[i] || `Image ${i + 1}`}
-                                                        width={800}
-                                                        height={400}
-                                                    />
-                                                </div>
-
-                                                {announcement.captions?.[i] && (
+                                        {/* Images with spacing */}
+                                        {announcement.images && announcement.images.length > 0 && (
+                                            <div className="w-full space-y-4 mb-8">
+                                                {announcement.images.map((img, i) => (
                                                     <div
-                                                        id="image-caption"
-                                                        className="w-full text-left italic mt-[10px] mb-[30px]"
+                                                        key={img}
+                                                        className="w-full relative mx-auto flex flex-col items-center"
                                                     >
-                                                        <p>{announcement.captions[i]}</p>
+                                                        <div id="image-container" className="w-full">
+                                                            <Image
+                                                                src={img}
+                                                                alt={announcement.captions?.[i] || `Image ${i + 1}`}
+                                                                width={800}
+                                                                height={400}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                                
+                                                {/* Captions at the end of all images */}
+                                                {announcement.captions && announcement.captions.length > 0 && (
+                                                    <div className="w-full text-left italic mt-4">
+                                                        {announcement.captions.map((caption, i) => (
+                                                            <p key={i} className="mb-2">{caption}</p>
+                                                        ))}
                                                     </div>
                                                 )}
                                             </div>
-                                        ))}
+                                        )}
 
                                         <div id="event-copy">
                                             <PortableText value={announcement.eventDescription} />
                                         </div>
                                     </div>
 
-                                    {/* Divider */}
-                                    <Image
-                                        id="vert-divider"
-                                        className="hidden md:block py-[50px] mt-[100px] ml-[80px] w-[5%] max-h-[650px]"
-                                        src="/SVG/line_vert.svg"
-                                        alt="Vertical Divider"
-                                        width="39"
-                                        height="650"
-                                    />
+                                    {/* Conditional Divider and Dates - only show if eventDates exist */}
+                                    {announcement.eventDates && announcement.eventDates.length > 0 && (
+                                        <>
+                                            {/* Divider */}
+                                            <Image
+                                                id="vert-divider"
+                                                className="hidden md:block py-[50px] mt-[100px] ml-[80px] w-[5%] max-h-[650px]"
+                                                src="/SVG/line_vert.svg"
+                                                alt="Vertical Divider"
+                                                width="39"
+                                                height="650"
+                                            />
 
-                                    {/* Column B: Dates */}
-                                    <div id="announcements-columnB" className="w-full md:w-[30%] p-[30px]">
-                                        <div id="Dates">
-                                            <h2 className="text-center">Dates:</h2>
-                                            {(() => {
-                                                const upcoming = announcement.eventDates
-                                                    ?.filter((e) => new Date(e.date) >= now)
-                                                    .sort(
-                                                        (a, b) =>
-                                                            new Date(a.date).getTime() - new Date(b.date).getTime()
-                                                    );
+                                            {/* Column B: Dates */}
+                                            <div id="announcements-columnB" className="w-full md:w-[30%] p-[30px]">
+                                                <div id="Dates">
+                                                    <h2 className="text-center">Dates:</h2>
+                                                    {(() => {
+                                                        const upcoming = announcement.eventDates
+                                                            ?.filter((e) => new Date(e.date) >= now)
+                                                            .sort(
+                                                                (a, b) =>
+                                                                    new Date(a.date).getTime() - new Date(b.date).getTime()
+                                                            );
 
-                                                const past = announcement.eventDates
-                                                    ?.filter((e) => new Date(e.date) < now)
-                                                    .sort(
-                                                        (a, b) =>
-                                                            new Date(a.date).getTime() - new Date(b.date).getTime()
-                                                    );
+                                                        const past = announcement.eventDates
+                                                            ?.filter((e) => new Date(e.date) < now)
+                                                            .sort(
+                                                                (a, b) =>
+                                                                    new Date(a.date).getTime() - new Date(b.date).getTime()
+                                                            );
 
-                                                const sortedEvents = [...(upcoming || []), ...(past || [])];
+                                                        const sortedEvents = [...(upcoming || []), ...(past || [])];
 
-                                                return sortedEvents.map((event, i) => {
-                                                    const isPast = new Date(event.date) < now;
+                                                        return sortedEvents.map((event, i) => {
+                                                            const isPast = new Date(event.date) < now;
 
-                                                    return (
-                                                        <div
-                                                            key={i}
-                                                            className={`mb-4 transition-all duration-300 ${isPast ? 'opacity-50 grayscale' : ''
-                                                                }`}
-                                                        >
-                                                            <EventBlock event={event} />
-                                                        </div>
-                                                    );
-                                                });
-                                            })()}
-                                        </div>
-                                    </div>
+                                                            return (
+                                                                <div
+                                                                    key={i}
+                                                                    className={`mb-4 transition-all duration-300 ${isPast ? 'opacity-50 grayscale' : ''
+                                                                        }`}
+                                                                >
+                                                                    <EventBlock event={event} />
+                                                                </div>
+                                                            );
+                                                        });
+                                                    })()}
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         ))}
