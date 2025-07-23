@@ -29,13 +29,33 @@ type Props = {
     pages: string;
     physical: string;
     isbn: string;
+    designer: string;
   };
   shopifyProductId?: string;
 };
 
-export default function ColophonSection({ stock, specs, shopifyProductId }: Props) {
+export default function ShopifySection({ stock, specs, shopifyProductId }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const componentId = `product-component-${shopifyProductId}`;
+
+  // Utility function to get filled specs
+  const getFilledSpecs = () => {
+    const specFields = [
+      { key: 'year' as const, label: 'Year' },
+      { key: 'language' as const, label: 'Language' },
+      { key: 'pages' as const, label: 'Pages' },
+      { key: 'physical' as const, label: 'Physical Format' },
+      { key: 'isbn' as const, label: 'ISBN' },
+      { key: 'designer' as const, label: 'Designer' },
+    ];
+
+    return specFields.filter(field => {
+      const value = specs[field.key];
+      return value && value.trim() !== '';
+    });
+  };
+
+  const filledSpecs = getFilledSpecs();
 
   useEffect(() => {
     if (isOpen && shopifyProductId) {
@@ -126,8 +146,6 @@ export default function ColophonSection({ stock, specs, shopifyProductId }: Prop
 
       loadShopify();
     }
-
-    // ✅ Add componentId to the deps
   }, [isOpen, shopifyProductId, componentId]);
 
   return (
@@ -158,14 +176,16 @@ export default function ColophonSection({ stock, specs, shopifyProductId }: Prop
 
       {isOpen && (
         <div className="mt-4 space-y-6">
-          {/* Specs */}
-          <div className="space-y-1 text-bs">
-            <div><strong>Year:</strong> {specs.year}</div>
-            <div><strong>Language:</strong> {specs.language}</div>
-            <div><strong>Pages:</strong> {specs.pages}</div>
-            <div><strong>Physical:</strong> {specs.physical}</div>
-            <div><strong>ISBN:</strong> {specs.isbn}</div>
-          </div>
+          {/* Specs - Only show if there are filled specs */}
+          {filledSpecs.length > 0 && (
+            <div className="space-y-1 text-bs">
+              {filledSpecs.map(field => (
+                <div key={field.key}>
+                  <strong>{field.label}:</strong> {specs[field.key]}
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Stockists */}
           {stock && (

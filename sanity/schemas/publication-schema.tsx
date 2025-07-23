@@ -87,6 +87,11 @@ const publication = {
           title: "ISBN",
           type: "string",
         },
+        {
+          name: "designer",
+          title: "Designer",
+          type: "string",
+        },
       ],
     },
     {

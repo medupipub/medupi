@@ -18,6 +18,7 @@ export type Publication = {
         pages: string;
         physical: string;
         isbn: string;
+        designer: string;
     }
     spreads: string[];
 }

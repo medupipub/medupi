@@ -27,7 +27,8 @@ export async function getPublications(): Promise<Publication[]> {
           "language": specs.language,
           "pages": specs.pages,
           "physical": specs.physical,
-          "isbn": specs.isbn
+          "isbn": specs.isbn,
+          "designer": specs.designer
         },
         "spreads": spreads[].asset->url
       }`
@@ -60,7 +61,8 @@ export async function getPublication(slug: string): Promise<Publication> { // th
     "language": specs.language,
     "pages": specs.pages,
     "physical": specs.physical,
-    "isbn": specs.isbn
+    "isbn": specs.isbn,
+    "designer": specs.designer
 }, 
         "spreads": spreads[].asset->url     
         }`,
