@@ -40,80 +40,82 @@ export default function PublicationCarousel({ publications }: Props) {
     if (!publications || publications.length === 0) return null
 
     return (
-        <div ref={glideRef} className="glide relative w-full max-w-[1200px] mx-auto overflow-visible">
-            {/* Track and Slides */}
-            <div className="glide__track" data-glide-el="track">
-                <ul className="glide__slides flex justify-center items-center">
-                    {publications.map((pub) => (
-                        <li
-                            key={pub._id}
-                            className="glide__slide flex justify-center items-center px-2 sm:px-4"
-                        >
-                            <Link
-                                href={`/publications/${pub.slug}`}
-                                className="block text-center group w-full max-w-[250px] sm:max-w-[280px] md:max-w-[300px]"
+        <div className="w-full max-w-[1200px] mx-auto">
+            <div ref={glideRef} className="glide relative w-full overflow-visible">
+                {/* Track and Slides */}
+                <div className="glide__track" data-glide-el="track">
+                    <ul className="glide__slides flex justify-center items-center">
+                        {publications.map((pub) => (
+                            <li
+                                key={pub._id}
+                                className="glide__slide flex justify-center items-center px-2 sm:px-4"
                             >
-                                <div className="w-full h-[300px] flex justify-center items-center overflow-hidden">
-                                    <Image
-                                        src={pub.frontcover ?? '/assets/default_cover.jpg'}
-                                        alt={pub.alt ?? pub.title}
-                                        width={250}
-                                        height={300}
-                                        className="w-auto h-full object-contain"
-                                    />
-                                </div>
-                                <div className="mt-2 text-center text-sm leading-snug">
-                                    <h3
-                                        className="font-oso w-full text-[1.1rem] font-normal text-black mt-5"
-                                        dangerouslySetInnerHTML={{
-                                            __html: pub.title
-                                                .replace(/~~(.*?)~~/g, '<s>$1</s>')
-                                                .replace(/\\n/g, '<br />'),
-                                        }}
-                                    />
-                                    {pub.author && (
-                                        <p className="pt-1 font-oso text-[0.9rem] italic">{pub.author}</p>
-                                    )}
-                                </div>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                                <Link
+                                    href={`/publications/${pub.slug}`}
+                                    className="block text-center group w-full max-w-[250px] sm:max-w-[280px] md:max-w-[300px]"
+                                >
+                                    <div className="w-full h-[300px] flex justify-center items-center overflow-hidden">
+                                        <Image
+                                            src={pub.frontcover ?? '/assets/default_cover.jpg'}
+                                            alt={pub.alt ?? pub.title}
+                                            width={250}
+                                            height={300}
+                                            className="w-auto h-full object-contain"
+                                        />
+                                    </div>
+                                    <div className="mt-2 text-center text-sm leading-snug">
+                                        <h3
+                                            className="font-oso w-full text-[1.1rem] font-normal text-black mt-5"
+                                            dangerouslySetInnerHTML={{
+                                                __html: pub.title
+                                                    .replace(/~~(.*?)~~/g, '<s>$1</s>')
+                                                    .replace(/\\n/g, '<br />'),
+                                            }}
+                                        />
+                                        {pub.author && (
+                                            <p className="pt-1 font-oso text-[0.9rem] italic">{pub.author}</p>
+                                        )}
+                                    </div>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
-            {/* Navigation Arrows */}
-            <div
-                className="glide__arrows absolute top-1/2 left-0 right-0 flex justify-between items-center px-2 pointer-events-none z-10"
-                data-glide-el="controls"
-            >
-                <button
-                    className="glide__arrow glide__arrow--left pointer-events-auto transform -translate-y-1/2 ml-1 sm:-ml-4 md:-ml-8"
-                    data-glide-dir="<"
-                    disabled={!glideMounted}
-                >
-                    <Image
-                        src="/SVG/CarArrow_L.svg"
-                        alt="Previous"
-                        className="w-7 h-7 sm:w-10 sm:h-10 md:w-14 md:h-14"
-                        width={20}
-                        height={20}
-                    />
-                </button>
-                <button
-                    className="glide__arrow glide__arrow--right pointer-events-auto transform -translate-y-1/2 mr-1 sm:-mr-4 md:-mr-8"
-                    data-glide-dir=">"
-                    disabled={!glideMounted}
-                >
-                    <Image
-                        src="/SVG/CarArrow_R.svg"
-                        alt="Next"
-                        className="w-7 h-7 sm:w-10 sm:h-10 md:w-14 md:h-14"
-                        width={20}
-                        height={20}
-                    />
-                </button>
+                {/* Navigation Arrows - Responsive positioning */}
+                <div className="glide__arrows" data-glide-el="controls">
+                    <button
+                        className="glide__arrow glide__arrow--left absolute top-1/2 transform -translate-y-1/2 z-10
+                                   left-[-30px] md:left-[-32px]
+                                   disabled:opacity-50"
+                        data-glide-dir="<"
+                        disabled={!glideMounted}
+                    >
+                        <Image
+                            src="/SVG/CarArrow_L.svg"
+                            alt="Previous"
+                            className="w-8 h-8 md:w-11 md:h-11"
+                            width={32}
+                            height={32}
+                        />
+                    </button>
+                    <button
+                        className="glide__arrow glide__arrow--right absolute top-1/2 transform -translate-y-1/2 z-10
+                                   right-[-50px] md:right-[-32px]
+                                   disabled:opacity-50"
+                        data-glide-dir=">"
+                        disabled={!glideMounted}
+                    >
+                        <Image
+                            src="/SVG/CarArrow_R.svg"
+                            alt="Next"
+                            className="w-8 h-8 md:w-11 md:h-11"
+                            width={32}
+                            height={32}
+                        />
+                    </button>
+                </div>
             </div>
         </div>
     )
-
 }

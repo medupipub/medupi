@@ -172,7 +172,7 @@ export default async function Home() {
           <PublicationsLink />
 
         </div>
-        <div id="section-main" className="w-[80%] p-[20px] flex flex-col justify-center items-center">
+        <div id="section-main" className="w-[80%] p-[20px] ml-[20px] flex flex-col justify-center items-center">
           <PublicationCarousel publications={publications} />
         </div>
       </section>
