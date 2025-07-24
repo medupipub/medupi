@@ -1,10 +1,10 @@
 import { getPublication, getPublications } from "@/sanity/sanity-utils";
-import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 import PublicationTitle from "@/components/PublicationTitle";
 import ColophonSection from "@/components/ColophonSection";
 import Footer from "@/components/Footer";
+import PortableTextRenderer from "@/components/PortableTextRenderer"; // Import your component
 import type { Publication } from "@/types/Publication";
 
 // Add this line - revalidate every 60 seconds
@@ -101,8 +101,9 @@ export default async function Publication({ params }: Props) {
                 </p>
               </header>
 
+              {/* Replace the PortableText with your custom component */}
               <div className="mt-6">
-                <PortableText value={publication.content} />
+                <PortableTextRenderer content={publication.content} />
               </div>
 
               <ColophonSection
