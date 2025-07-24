@@ -1,6 +1,5 @@
 // app/(site)/[slug]/page.tsx
 import { getPage } from "@/sanity/sanity-utils";
-import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import PortableTextRenderer from "@/components/PortableTextRenderer";

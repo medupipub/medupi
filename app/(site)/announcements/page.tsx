@@ -1,5 +1,4 @@
 import { getAnnouncements } from '@/sanity/sanity-utils';
-import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import EventBlock from '@/components/EventDropdown';
 import Link from 'next/link';

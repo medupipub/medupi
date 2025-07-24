@@ -1,8 +1,6 @@
 import { getPages, getPublications } from '@/sanity/sanity-utils';
 import { getAnnouncements } from '@/sanity/sanity-utils';
-import { PortableText } from '@portabletext/react';
 import '../../styles/style.css';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import EventBlock from '@/components/EventDropdown';
