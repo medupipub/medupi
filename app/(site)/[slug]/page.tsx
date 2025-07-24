@@ -3,6 +3,7 @@ import { getPage } from "@/sanity/sanity-utils";
 import { PortableText } from "@portabletext/react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import PortableTextRenderer from "@/components/PortableTextRenderer";
 
 // Add this line - revalidate every 60 seconds
 export const revalidate = 60;
@@ -42,18 +43,18 @@ export default async function Page({
             <div className="w-full flex flex-col md:flex-row justify-between items-start gap-[40px] p-[20px]">
               {/* Column A */}
               <div id="columnA" className="w-full md:w-[50%] m-[5px]">
-                <PortableText value={page.columnA} />
+                <PortableTextRenderer content={page.columnA} />
               </div>
 
               {/* Column B */}
               <div id="columnB" className="w-full md:w-[50%] m-[5px]">
-                <PortableText value={page.columnB} />
+                <PortableTextRenderer content={page.columnB} />
               </div>
             </div>
 
             {/* Contact info */}
             <div className="w-full text-center pt-[40px] px-[20px]">
-              <PortableText value={page.contactInfo} />
+              <PortableTextRenderer content={page.contactInfo} />
             </div>
           </div>
         </section>
@@ -68,13 +69,13 @@ export default async function Page({
       <div className="p-10">
         <h1 className="text-3xl font-bold mb-4">{page.title}</h1>
         <div className="mb-6">
-          <PortableText value={page.columnA} />
+          <PortableTextRenderer content={page.columnA} />
         </div>
         <div className="mb-6">
-          <PortableText value={page.columnB} />
+          <PortableTextRenderer content={page.columnB} />
         </div>
         <div>
-          <PortableText value={page.contactInfo} />
+          <PortableTextRenderer content={page.contactInfo} />
         </div>
       </div>
       <Footer />

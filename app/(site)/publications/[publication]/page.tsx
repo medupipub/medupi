@@ -4,7 +4,7 @@ import Link from "next/link";
 import PublicationTitle from "@/components/PublicationTitle";
 import ColophonSection from "@/components/ColophonSection";
 import Footer from "@/components/Footer";
-import PortableTextRenderer from "@/components/PortableTextRenderer"; // Import your component
+import PortableTextRenderer from "@/components/PortableTextRenderer";
 import type { Publication } from "@/types/Publication";
 
 // Add this line - revalidate every 60 seconds

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import EventBlock from '@/components/EventDropdown';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import PortableTextRenderer from "@/components/PortableTextRenderer";
 
 // Add this line - revalidate every 60 seconds
 export const revalidate = 60;
@@ -95,7 +96,7 @@ export default async function AnnouncementsPage() {
                                         )}
 
                                         <div id="event-copy">
-                                            <PortableText value={announcement.eventDescription} />
+                                            <PortableTextRenderer content={announcement.eventDescription} />
                                         </div>
                                     </div>
 

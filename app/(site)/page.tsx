@@ -9,6 +9,7 @@ import EventBlock from '@/components/EventDropdown';
 import PublicationsLink from '@/components/PublicationsLink';
 import PublicationCarousel from '@/components/PublicationsCarousel';
 import Footer from '@/components/Footer';
+import PortableTextRenderer from '@/components/PortableTextRenderer';
 
 // Add this line - revalidate every 60 seconds
 export const revalidate = 60;
@@ -85,7 +86,7 @@ export default async function Home() {
                       )}
 
                       <div id="event-copy">
-                        <PortableText value={announcement.eventDescription} />
+                        <PortableTextRenderer content={announcement.eventDescription} />
                       </div>
                     </div>
                   ))}
@@ -189,18 +190,18 @@ export default async function Home() {
           <div className="w-full flex flex-col md:flex-row justify-between items-start gap-[40px] p-[20px]">
             {/* Column A */}
             <div id="columnA" className="w-full md:w-[50%] m-[5px]">
-              <PortableText value={aboutPage.columnA} />
+              <PortableTextRenderer content={aboutPage.columnA} />
             </div>
 
             {/* Column B */}
             <div id="columnB" className="w-full md:w-[50%] m-[5px]">
-              <PortableText value={aboutPage.columnB} />
+              <PortableTextRenderer content={aboutPage.columnB} />
             </div>
           </div>
 
           {/* Contact info */}
           <div className="w-full text-center pt-[40px] px-[20px]">
-            <PortableText value={aboutPage.contactInfo} />
+            <PortableTextRenderer content={aboutPage.contactInfo} />
           </div>
         </div>
       </section>
