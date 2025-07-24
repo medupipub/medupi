@@ -65,19 +65,39 @@ export default async function Page({
 
   // Default layout for other pages
   return (
-    <div>
-      <div className="p-10">
-        <h1 className="text-3xl font-bold mb-4">{page.title}</h1>
-        <div className="mb-6">
-          <PortableTextRenderer content={page.columnA} />
+    <div className="flex flex-col min-h-screen">
+      {/* Main content */}
+      <div className="flex-grow p-10 flex flex-col md:flex-row">
+        {/* Right section for the title */}
+       
+        <div
+          id="section-sidebar"
+          className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl w-full md:w-[20%] max-w-[200px] p-2.5 pt-12"
+        >
+          <p className="md:text-[clamp(1rem,2vw,1.5rem)]">{page.title}</p>
         </div>
-        <div className="mb-6">
-          <PortableTextRenderer content={page.columnB} />
+
+
+        {/* Left content: the main content columns */}
+        <div
+            id="section-main"
+            className="w-full md:w-[80%] p-[20px] flex flex-col justify-center items-center"
+          >
+          <div className="mb-6 mt-[10px]">
+            <PortableTextRenderer content={page.columnA} />
+          </div>
+          <div className="mb-6">
+            <PortableTextRenderer content={page.columnB} />
+          </div>
+          <div>
+            <PortableTextRenderer content={page.contactInfo} />
+          </div>
         </div>
-        <div>
-          <PortableTextRenderer content={page.contactInfo} />
-        </div>
+
+
       </div>
+
+      {/* Footer */}
       <Footer />
     </div>
   );
