@@ -53,7 +53,7 @@ export default async function Page({
             </div>
 
             {/* Contact info */}
-            <div className="w-full text-center pt-[40px] px-[20px]">
+            <div className="about-contact-info w-full text-center pt-[40px] px-[20px]">
               <PortableTextRenderer content={page.contactInfo} />
             </div>
           </div>
