@@ -52,8 +52,8 @@ export default async function AnnouncementsPage() {
                             <div key={announcement._id} className="w-full">
                                 {/* Announcement Separator - only show if not the first announcement */}
                                 {announcementIndex > 0 && (
-                                    <div className="w-full flex justify-center my-8">
-                                        <div className="w-full max-w-4xl border-t-2 border-gray-400 opacity-60"></div>
+                                    <div className="w-full flex justify-start my-8"> {/* align left with justify-start */}
+                                         <div className="w-full max-w-6xl border-t-2 border-black border-dashed opacity-60"></div>
                                     </div>
                                 )}
 
