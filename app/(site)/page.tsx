@@ -10,7 +10,6 @@ import PublicationsLink from '@/components/PublicationsLink';
 import PublicationCarousel from '@/components/PublicationsCarousel';
 import Footer from '@/components/Footer';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
-import announcement from '@/sanity/schemas/note-schema';
 
 // Add this line - revalidate every 60 seconds
 export const revalidate = 60;
