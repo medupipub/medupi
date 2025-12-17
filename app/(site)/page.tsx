@@ -233,7 +233,7 @@ export default async function Home() {
 
                 {/* 3. Description: Centered Underneath */}
                 <div className="w-full max-w-screen-xl px-5 flex justify-center mt-12">
-                  <div className="w-full md:w-[60%] lg:w-[50%] pt-8 border-t border-black/20">
+                  <div className="w-full md:w-[60%] lg:w-[50%] pt-8">
                     {note.eventDescription && (
                       <div className="text-[13px] leading-relaxed prose-sm max-w-none text-black/80">
                         <PortableTextRenderer content={note.eventDescription} />
