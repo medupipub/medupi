@@ -198,9 +198,10 @@ export default async function Home() {
 
                 {/* 2. Centered Media Row (Image + PDF) */}
                 <div className="w-full flex justify-center">
-                  <div className="flex flex-col md:flex-row gap-5 items-start px-5 overflow-x-auto pb-4">
+                  {/* Changed md:flex-row to min-[995px]:flex-row */}
+                  <div className="flex flex-col min-[995px]:flex-row gap-5 items-center min-[995px]:items-start px-5 overflow-x-auto pb-4">
 
-                    {/* Column A: Image Wrapper (Hugging Image) */}
+                    {/* Column A: Image Wrapper */}
                     <div className="w-fit flex flex-col">
                       {note.images?.[0] && (
                         <>
@@ -209,7 +210,7 @@ export default async function Home() {
                             alt={note.captions?.[0] || "Note Image"}
                             width={800}
                             height={1131}
-                            className="w-auto h-[60vh] object-contain shadow-sm border border-black/5"
+                            className="w-auto h-[60vh] max-w-full object-contain shadow-sm border border-black/5"
                             priority
                           />
                           {note.captions?.[0] && (
@@ -221,7 +222,7 @@ export default async function Home() {
                       )}
                     </div>
 
-                    {/* Column B: PDF Wrapper (Hugging PDF) */}
+                    {/* Column B: PDF Wrapper */}
                     <div className="w-fit">
                       {note.pdf?.asset?.url && (
                         <NotesPdfClient url={note.pdf.asset.url} title={note.title} />
