@@ -11,13 +11,14 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Add the webpack configuration here
+  // Process the react-pdf package
+  transpilePackages: ['react-pdf'],
+
+  // We are removing the 'experimental.turbo' section to fix the TS error
+  
   webpack: (config) => {
-    // This addresses the pdf.js issues by telling webpack 
-    // to ignore these modules on the client side
     config.resolve.alias.canvas = false;
     config.resolve.alias.encoding = false;
-
     return config;
   },
 };
