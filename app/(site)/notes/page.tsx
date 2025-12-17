@@ -83,7 +83,19 @@ export default async function NotesPage() {
                                                         </div>
                                                     </div>
                                                 ))}
-                                                
+
+                                                {/* PDF Link (move to second column if working) */}
+                                                {note.pdf && note.pdf.asset && (
+                                                    <div className="w-full text-left italic mt-4">
+                                                        <iframe
+    src={note.pdf.asset.url}
+    width="100%"
+    height="600"
+    className="border"
+  />
+                                                    </div>
+                                                )}
+
                                                 {/* Captions at the end of all images */}
                                                 {note.captions && note.captions.length > 0 && (
                                                     <div className="w-full text-left italic mt-4">

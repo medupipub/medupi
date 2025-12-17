@@ -15,6 +15,13 @@ export type Note = {
   slug: string;
   images: string[];
   captions: string[];
+  pdf?: {
+  asset?: {
+    url: string;
+    originalFilename?: string;
+    size?: number;
+  }
+}
   eventDescription: PortableTextBlock[];
   validUntil: Date;
   eventDates: EventDate[];

@@ -166,7 +166,7 @@ export async function getNotes(): Promise<Note[]> {
     originalFilename,
     size
   }
-}
+},
       eventDescription,
       validUntil,
       eventDates[] {
@@ -196,7 +196,7 @@ export async function getNote(slug: string): Promise<Note> {
     originalFilename,
     size
   }
-}
+},
       eventDescription,
       validUntil,
       eventDates[] {
