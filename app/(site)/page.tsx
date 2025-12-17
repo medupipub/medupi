@@ -169,88 +169,79 @@ export default async function Home() {
 
       </div>
 
-      {/* Notes Section - Replace your existing notes section with this */}
+      {/* Notes Section */}
       {activeNotes.length > 0 && (
         <section
           id="notes-section"
-          className="bg-[#F5C3C0] w-full flex flex-col md:flex-row p-[20px] min-h-[400px] relative shadow-[0_0_0.8rem_0.8rem_#F5C3C0]"
+          className="bg-[#ffb347] w-full flex flex-col md:flex-row p-[20px] min-h-[400px] relative shadow-[0_0_0.8rem_0.8rem_#ffb347]"
         >
           {/* Sidebar */}
-          <div
-            id="section-sidebar"
-            className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl w-[20%] max-w-[200px] p-2.5 pt-12"
-          >
+          <div className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl w-[20%] max-w-[200px] p-2.5 pt-12">
             <Link href="/notes">
               <p className="md:text-[clamp(1rem,2vw,1.5rem)]">Notes</p>
             </Link>
           </div>
 
           {/* Main Content */}
-          <div
-            id="section-main"
-            className="items-center flex flex-col p-5 pb-15 w-full md:w-[80%]"
-          >
-            <div
-              id="notes-container"
-              className="justify-left flex flex-col w-full max-w-screen-xl space-y-12"
-            >
-              {activeNotes.map((note) => (
-                <div key={note._id} className="w-full">
-                  <h2 className="text-[clamp(1.5em,4vw,3em)] py-7 text-center md:text-left">
-                    {note.title}
-                  </h2>
+          <div className="flex flex-col p-5 w-full md:w-[80%] max-w-screen-xl">
+            {activeNotes.map((note) => (
+              <div key={note._id} className="w-full mb-32 flex flex-col items-center">
 
-                  {/* Two Column Layout - Image + PDF side by side on desktop, stacked on mobile */}
-                  <div className="flex flex-col md:flex-row gap-8 w-full">
-                    {/* Column A - Images */}
-                    <div className="w-full md:w-1/2">
-                      {note.images && note.images.length > 0 && (
-                        <div className="w-full space-y-4">
-                          {note.images.map((img, i) => (
-                            <div
-                              key={img}
-                              className="w-full relative mx-auto flex flex-col items-center"
-                            >
-                              <Image
-                                src={img}
-                                alt={note.captions?.[i] || `Image ${i + 1}`}
-                                width={800}
-                                height={1131}
-                                className="w-full h-auto"
-                              />
-                            </div>
-                          ))}
+                {/* 1. Title: Now fully centered */}
+                <div className="w-full flex justify-center">
+                  <div className="w-full max-w-screen-xl px-5 text-center"> {/* Changed text-left to text-center */}
+                    <h2 className="text-[clamp(1.5em,4vw,3em)] py-7">
+                      {note.title}
+                    </h2>
+                  </div>
+                </div>
 
-                          {note.captions && note.captions.length > 0 && (
-                            <div className="w-full text-left italic mt-4">
-                              {note.captions.map((caption, i) => (
-                                <p key={i} className="mb-2 text-sm">
-                                  {caption}
-                                </p>
-                              ))}
-                            </div>
+                {/* 2. Centered Media Row (Image + PDF) */}
+                <div className="w-full flex justify-center">
+                  <div className="flex flex-col md:flex-row gap-5 items-start px-5 overflow-x-auto pb-4">
+
+                    {/* Column A: Image Wrapper (Hugging Image) */}
+                    <div className="w-fit flex flex-col">
+                      {note.images?.[0] && (
+                        <>
+                          <Image
+                            src={note.images[0]}
+                            alt={note.captions?.[0] || "Note Image"}
+                            width={800}
+                            height={1131}
+                            className="w-auto h-[60vh] object-contain shadow-sm border border-black/5"
+                            priority
+                          />
+                          {note.captions?.[0] && (
+                            <p className="mt-3 text-[13px] italic font-light lowercase leading-tight max-w-full">
+                              {note.captions[0]}
+                            </p>
                           )}
-                        </div>
-                      )}
-
-                      {note.eventDescription && (
-                        <div className="mt-6">
-                          <PortableTextRenderer content={note.eventDescription} />
-                        </div>
+                        </>
                       )}
                     </div>
 
-                    {/* Column B - PDF */}
-                    <div className="w-full md:w-1/2 flex justify-center md:justify-start">
+                    {/* Column B: PDF Wrapper (Hugging PDF) */}
+                    <div className="w-fit">
                       {note.pdf?.asset?.url && (
                         <NotesPdfClient url={note.pdf.asset.url} title={note.title} />
                       )}
                     </div>
-
                   </div>
                 </div>
-              ))}
-            </div>
+
+                {/* 3. Description: Centered Underneath */}
+                <div className="w-full max-w-screen-xl px-5 flex justify-center mt-12">
+                  <div className="w-full md:w-[60%] lg:w-[50%] pt-8 border-t border-black/20">
+                    {note.eventDescription && (
+                      <div className="text-[13px] leading-relaxed prose-sm max-w-none text-black/80">
+                        <PortableTextRenderer content={note.eventDescription} />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       )}

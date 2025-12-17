@@ -1,75 +1,77 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-
-// 1. Use the "legacy" build for better compatibility with Next.js/Webpack
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-// Inside PdfViewer.tsx
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@4.4.168/legacy/build/pdf.worker.min.mjs`;
-type PdfViewerProps = {
-  url: string;
-  title?: string;
-};
 
-export default function PdfViewer({ url }: PdfViewerProps) {
+export default function PdfViewer({ url, title }: { url: string; title?: string }) {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [containerWidth, setContainerWidth] = useState<number>(400);
+  const [renderHeight, setRenderHeight] = useState<number>(650);
 
-  // Handle responsive width calculation safely
   useEffect(() => {
-    const updateWidth = () => {
-      const el = document.getElementById('pdf-wrapper');
-      if (el) setContainerWidth(el.clientWidth);
+    const calculateSize = () => {
+      // Set height to 60% of viewport height
+      const vh = window.innerHeight * 0.60; 
+      setRenderHeight(vh);
     };
-
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
+    calculateSize();
+    window.addEventListener('resize', calculateSize);
+    return () => window.removeEventListener('resize', calculateSize);
   }, []);
 
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
-    setNumPages(numPages);
-  }
-
   return (
-    <div id="pdf-wrapper" className="w-full flex flex-col items-center">
-      <div className="border border-gray-300 shadow-lg bg-white overflow-hidden">
+    <div className="w-fit flex flex-col items-start">
+      {/* PDF Canvas Container */}
+      <div className="bg-white shadow-sm border border-black/5 overflow-hidden">
         <Document
           file={url}
-          onLoadSuccess={onDocumentLoadSuccess}
-          loading={<div className="p-10 italic">Opening document...</div>}
+          onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+          loading={<div className="p-10 text-xs lowercase italic">loading...</div>}
         >
           <Page 
             pageNumber={currentPage} 
-            width={containerWidth}
+            height={renderHeight}
             renderAnnotationLayer={true}
             renderTextLayer={true}
+            className="block"
           />
         </Document>
       </div>
 
-      <div className="flex items-center gap-6 mt-6 py-2 px-4 rounded-lg bg-gray-50 border border-gray-200">
-        <button
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-          disabled={currentPage <= 1}
-          className="text-xl disabled:opacity-20 hover:text-blue-600 transition-colors"
-        >
-          ←
-        </button>
-        <p className="text-sm font-medium">
-          {currentPage} / {numPages || '--'}
-        </p>
-        <button
-          onClick={() => setCurrentPage(prev => Math.min(prev + 1, numPages || 1))}
-          disabled={numPages ? currentPage >= numPages : false}
-          className="text-xl disabled:opacity-20 hover:text-blue-600 transition-colors"
-        >
-          →
-        </button>
+      {/* Minimalist Controls */}
+      <div className="mt-3 flex flex-col gap-1 text-sm font-normal lowercase w-full">
+        <div className="flex justify-between items-center w-full">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage <= 1}
+              className="hover:opacity-50 disabled:opacity-10 transition-opacity text-xl leading-none"
+            >
+              ←
+            </button>
+            <span className="tabular-nums text-[12px] pt-1">{currentPage} / {numPages || '--'}</span>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, numPages || 1))}
+              disabled={numPages ? currentPage >= numPages : false}
+              className="hover:opacity-50 disabled:opacity-10 transition-opacity text-xl leading-none"
+            >
+              →
+            </button>
+          </div>
+
+          <a 
+            href={url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:underline italic text-[11px] opacity-70"
+          >
+            download pdf
+          </a>
+        </div>
       </div>
     </div>
   );
