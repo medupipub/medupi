@@ -1,5 +1,6 @@
 import { getPages, getPublications } from '@/sanity/sanity-utils';
 import { getAnnouncements } from '@/sanity/sanity-utils';
+import { getNotes } from '@/sanity/sanity-utils';
 import '../../styles/style.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,6 +9,7 @@ import PublicationsLink from '@/components/PublicationsLink';
 import PublicationCarousel from '@/components/PublicationsCarousel';
 import Footer from '@/components/Footer';
 import PortableTextRenderer from '@/components/PortableTextRenderer';
+import announcement from '@/sanity/schemas/note-schema';
 
 // Add this line - revalidate every 60 seconds
 export const revalidate = 60;
@@ -15,6 +17,7 @@ export const revalidate = 60;
 export default async function Home() {
   const publications = await getPublications();
   const announcements = await getAnnouncements();
+  const notes = await getNotes();
   const pages = await getPages();
   const aboutPage = pages.find((page) => page.slug === 'about');
 
@@ -24,6 +27,9 @@ export default async function Home() {
 
   const now = new Date();
   const activeAnnouncements = announcements.filter(
+    (a) => a.validUntil && new Date(a.validUntil) > now
+  );
+  const activeNotes = notes.filter(
     (a) => a.validUntil && new Date(a.validUntil) > now
   );
 
@@ -71,7 +77,7 @@ export default async function Home() {
                               </div>
                             </div>
                           ))}
-                          
+
                           {/* Captions at the end of all images */}
                           {announcement.captions && announcement.captions.length > 0 && (
                             <div className="w-full text-left italic mt-4">
@@ -130,6 +136,136 @@ export default async function Home() {
                                 .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
                               const past = announcement.eventDates
+                                .filter(e => new Date(e.date) < now)
+                                .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+                              const sortedEvents = [...upcoming, ...past];
+
+                              return sortedEvents.map((event, i) => {
+                                const isPast = new Date(event.date) < now;
+
+                                return (
+                                  <div
+                                    key={i}
+                                    className={`mb-4 transition-all duration-300 ${isPast ? 'opacity-50 grayscale' : ''}`}
+                                  >
+                                    <EventBlock event={event} />
+                                  </div>
+                                );
+                              });
+                            })()}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+
+          </section>
+        )}
+
+      </div>
+
+      <div id="sections" className="flex-1 w-full">
+        {activeNotes.length > 0 && (
+          <section id="notes-section" className="bg-[#F5C3C0] w-full flex flex-col md:flex-row p-[20px] min-h-[400px] relative shadow-[0_0_0.8rem_0.8rem_#F5C3C0]">
+
+            {/* Sidebar */}
+            <div id="section-sidebar" className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl
+             w-[20%] max-w-[200px] p-2.5 pt-12">
+              <Link href="/notes"><p className="md:text-[clamp(1rem,2vw,1.5rem)]"> Notes </p></Link>
+            </div>
+
+            {/* Main Content */}
+            <div id="section-main" className="items-center flex flex-col p-5 pb-15 w-full md:w-[80%]">
+              {/* Former loose <body id="updates-page"> here */}
+              <div id="notes-container" className="justify-left flex flex-col md:flex-row w-full max-w-screen-xl"> {/* FKA container */}
+
+                {/* Column A */}
+                <div id="notes-columnA" className="md:w-1/2">
+                  {activeNotes.map((note) => (
+                    <div key={note._id}>
+                      <h2 className="text-[clamp(1.5em,4vw,3em)] py-7">{note.title}</h2>
+
+                      {/* Updated images section with spacing and captions at end */}
+                      {note.images && note.images.length > 0 && (
+                        <div className="w-full space-y-4 mb-8">
+                          {note.images.map((img, i) => (
+                            <div
+                              key={img}
+                              className="w-full relative mx-auto flex flex-col items-center"
+                            >
+                              <div id="image-container" className="w-full">
+                                <Image
+                                  src={img}
+                                  alt={note.captions?.[i] || `Image ${i + 1}`}
+                                  width={800}
+                                  height={400}
+                                />
+                              </div>
+                            </div>
+                          ))}
+
+                          {/* Captions at the end of all images */}
+                          {note.captions && note.captions.length > 0 && (
+                            <div className="w-full text-left italic mt-4">
+                              {note.captions.map((caption, i) => (
+                                <p key={i} className="mb-2">{caption}</p>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      <div id="event-copy">
+                        <PortableTextRenderer content={note.eventDescription} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Conditional Divider - only show if any note has eventDates */}
+                {activeNotes.some(note => note.eventDates && note.eventDates.length > 0) && (
+                  <>
+                    {/* Vertical divider for md+ screens */}
+                    <Image
+                      id="vert-divider"
+                      className="hidden md:block py-[50px] mt-[100px] ml-[80px] w-[5%] max-h-[650px]"
+                      src="/SVG/line_vert.svg"
+                      alt="Vertical Divider"
+                      width="40"
+                      height="650"
+                    />
+
+                    {/* Horizontal divider for small screens */}
+                    <Image
+                      id="horiz-divider"
+                      className="block md:hidden py-[50px] mx-auto my-4 w-full max-w-[650px] h-auto"
+                      src="/SVG/line_horiz.svg"
+                      alt=""
+                      aria-hidden="true"
+                      role="presentation"
+                      width="40"
+                      height="650"
+                    />
+
+                    {/* Column B */}
+                    <div id="notes-columnB" className="w-full md:w-[30%] p-[30px]">
+                      <div id="Dates">
+                        <h2 className="text-center">Dates:</h2>
+                        {activeNotes.map((note) => (
+                          <div key={note._id}>
+                            {/* Only render dates if eventDates exists and has content */}
+                            {note.eventDates && note.eventDates.length > 0 && (() => {
+                              const now = new Date();
+
+                              const upcoming = note.eventDates
+                                .filter(e => new Date(e.date) >= now)
+                                .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+                              const past = note.eventDates
                                 .filter(e => new Date(e.date) < now)
                                 .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 

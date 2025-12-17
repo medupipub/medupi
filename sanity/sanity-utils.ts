@@ -3,6 +3,7 @@ import { createClient, groq } from "next-sanity";
 import clientConfig from "./schemas/config/client-config";
 import { Page } from "@/types/Page";
 import { Announcement } from "@/types/Announcement";
+import { Note } from "@/types/Note";
 import { marked } from 'marked'
 import { PortableTextBlock } from "sanity";
 
@@ -135,6 +136,67 @@ export async function getAnnouncement(slug: string): Promise<Announcement> {
       "slug": slug.current,
       "images": images[].asset->url,
       captions,
+      eventDescription,
+      validUntil,
+      eventDates[] {
+        date,
+        venue,
+        address,
+        time,
+        description,
+      }
+    }`,
+    { slug }
+  );
+}
+
+export async function getNotes(): Promise<Note[]> {
+  return createClient(clientConfig).fetch(
+    //clean up this groq
+    groq`*[_type == "note"] | order(_createdAt desc) {
+      _id,
+      _createdAt,
+      title,
+      "slug": slug.current,
+      "images": images[].asset->url,
+      captions,
+      pdf {
+      asset->{
+    url,
+    originalFilename,
+    size
+  }
+}
+      eventDescription,
+      validUntil,
+      eventDates[] {
+        date,
+        venue,
+        address,
+        time,
+        description,
+      }
+    }`
+  )
+}
+export async function getNote(slug: string): Promise<Note> {
+  return createClient(clientConfig).fetch(
+    //clean up this groq
+    groq
+      `*[_type == "note" && slug.current == $slug][0] {
+      _id,
+      _createdAt,
+      title,
+      "slug": slug.current,
+      "images": images[].asset->url,
+      captions,
+      pdf {
+  asset->{
+    url,
+    originalFilename,
+    size
+  }
+}
       eventDescription,
       validUntil,
       eventDates[] {

@@ -101,6 +101,11 @@ export default function Header({ pages }: { pages: Page[] }) {
               <Link href="/announcements" className="hover:underline whitespace-nowrap">
                 Archive
               </Link>
+              <Link href="/notes" className="hover:underline whitespace-nowrap">
+                Notes
+              </Link>
+              
+
             </div>
           </div>
         </header>
