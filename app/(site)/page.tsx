@@ -169,7 +169,7 @@ export default async function Home() {
 
       </div>
 
-      {/* Notes Section - Replace your existing notes section with this */}
+      {/* Notes Section */}
       {activeNotes.length > 0 && (
         <section
           id="notes-section"
@@ -192,60 +192,111 @@ export default async function Home() {
           >
             <div
               id="notes-container"
-              className="justify-left flex flex-col w-full max-w-screen-xl space-y-12"
+              className="justify-left flex flex-col md:flex-col w-full max-w-screen-xl space-y-8"
             >
               {activeNotes.map((note) => (
-                <div key={note._id} className="w-full">
-                  <h2 className="text-[clamp(1.5em,4vw,3em)] py-7 text-center md:text-left">
-                    {note.title}
-                  </h2>
+                <div
+                  key={note._id}
+                  className="flex flex-col md:flex-row w-full gap-8 items-start"
+                >
+                  {/* Column A - Images */}
+                  <div id="notes-columnA" className="md:w-1/2">
+                    <h2 className="text-[clamp(1.5em,4vw,3em)] py-7">{note.title}</h2>
 
+<<<<<<< HEAD
                   {/* Two Column Layout - Image + PDF side by side on desktop, stacked on mobile */}
-                  <div className="flex flex-col md:flex-row gap-8 w-full">
+                  <div className="flex flex-col md:flex-row gap-2 w-full items-start">
                     {/* Column A - Images */}
-                    <div className="w-full md:w-1/2">
+                    <div className="w-full md:w-1/2 flex justify-center md:justify-end">
                       {note.images && note.images.length > 0 && (
-                        <div className="w-full space-y-4">
+                        <div className="w-full flex flex-col items-center md:items-end">
                           {note.images.map((img, i) => (
                             <div
                               key={img}
-                              className="w-full relative mx-auto flex flex-col items-center"
+                              className="relative aspect-[148/210] h-[60vh] md:h-[65vh] max-h-[800px]"
+
                             >
                               <Image
                                 src={img}
                                 alt={note.captions?.[i] || `Image ${i + 1}`}
-                                width={800}
-                                height={1131}
-                                className="w-full h-auto"
+                                fill
+                                className="object-contain"
                               />
                             </div>
                           ))}
-
-                          {note.captions && note.captions.length > 0 && (
-                            <div className="w-full text-left italic mt-4">
-                              {note.captions.map((caption, i) => (
-                                <p key={i} className="mb-2 text-sm">
-                                  {caption}
-                                </p>
-                              ))}
+                          {/* Captions underneath */}
+                          {note.captions && (
+                            <div className="mt-4 text-left italic text-sm max-w-[148/210]">
+                              {note.captions.map((c, i) => <p key={i}>{c}</p>)}
                             </div>
                           )}
                         </div>
                       )}
+=======
+                    {note.images && note.images.length > 0 && (
+                      <div className="w-full space-y-4 mb-8">
+                        {note.images.map((img, i) => (
+                          <div
+                            key={img}
+                            className="w-full relative mx-auto flex flex-col items-center"
+                          >
+                            <Image
+                              src={img}
+                              alt={note.captions?.[i] || `Image ${i + 1}`}
+                              width={800}
+                              height={1000}
+                            />
+                          </div>
+                        ))}
 
-                      {note.eventDescription && (
-                        <div className="mt-6">
-                          <PortableTextRenderer content={note.eventDescription} />
-                        </div>
-                      )}
+                        {note.captions && note.captions.length > 0 && (
+                          <div className="w-full text-left italic mt-4">
+                            {note.captions.map((caption, i) => (
+                              <p key={i} className="mb-2">
+                                {caption}
+                              </p>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    <div id="event-copy">
+                      <PortableTextRenderer content={note.eventDescription} />
+>>>>>>> parent of 06d8a1f (Notes PDF Embed (Using React))
                     </div>
+                  </div>
 
+<<<<<<< HEAD
                     {/* Column B - PDF */}
-                    <div className="w-full md:w-1/2">
+                    <div className="w-full md:w-1/2 flex justify-center md:justify-start">
                       {note.pdf?.asset?.url && (
                         <PdfEmbed url={note.pdf.asset.url} title={note.title} />
                       )}
                     </div>
+=======
+                  {/* Column B - PDF */}
+                  <div id="notes-columnB" className="md:w-1/2 p-[10px]">
+                    {note.pdf?.asset?.url && (
+                      <div className="w-full flex flex-col items-center space-y-2">
+                        <iframe
+                          src={note.pdf.asset.url}
+                          title={note.title}
+                          width="100%"
+                          height="600px"
+                          className="border shadow-md"
+                        />
+                        <a
+                          href={note.pdf.asset.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 underline"
+                        >
+                          Download PDF
+                        </a>
+                      </div>
+                    )}
+>>>>>>> parent of 06d8a1f (Notes PDF Embed (Using React))
                   </div>
                 </div>
               ))}
