@@ -14,7 +14,7 @@ const PdfViewer = dynamic(() => import('./PdfViewer'), {
 
 export default function NotesPdfClient({ url, title }: { url: string; title: string }) {
   return (
-    <div className="w-fit">
+    <div className="w-full flex justify-center">
       <PdfViewer url={url} title={title} />
     </div>
   );

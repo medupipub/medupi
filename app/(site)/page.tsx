@@ -196,24 +196,31 @@ export default async function Home() {
                 </div>
 
                 {/* 2. Centered Media Row (Image + PDF) */}
-                <div className="w-full flex justify-center">
-                  {/* Changed md:flex-row to min-[995px]:flex-row */}
-                  <div className="flex flex-col min-[995px]:flex-row gap-5 items-center min-[995px]:items-start px-5 overflow-x-auto pb-4">
+                <div className="w-full flex justify-center px-4 overflow-hidden">
+                  <div className="flex flex-col min-[995px]:flex-row gap-8 min-[1536px]:gap-16 items-center min-[995px]:items-start w-full max-w-[1200px] min-[1536px]:max-w-[1600px] justify-center">
 
                     {/* Column A: Image Wrapper */}
-                    <div className="w-fit flex flex-col">
+                    <div className="w-full flex flex-col items-center 
+      min-[995px]:w-fit 
+      max-w-[450px] 
+      max-[599px]:max-w-[350px] 
+      max-[399px]:max-w-[290px]
+      min-[1536px]:max-w-none"
+                    >
                       {note.images?.[0] && (
                         <>
                           <Image
                             src={note.images[0]}
                             alt={note.captions?.[0] || "Note Image"}
-                            width={800}
-                            height={1131}
-                            className="w-auto h-[60vh] max-w-full object-contain shadow-sm border border-black/5"
+                            width={1200} // Increased base width for higher res
+                            height={1600}
+                            className="w-auto h-auto shadow-sm border border-black/5 object-contain
+              min-[995px]:h-[60vh] 
+              min-[1536px]:h-[70vh]"
                             priority
                           />
                           {note.captions?.[0] && (
-                            <p className="mt-3 text-[13px] italic font-light lowercase leading-tight max-w-full">
+                            <p className="mt-3 text-[11px] italic font-light lowercase leading-tight text-center w-full min-[1536px]:text-[13px]">
                               {note.captions[0]}
                             </p>
                           )}
@@ -222,11 +229,18 @@ export default async function Home() {
                     </div>
 
                     {/* Column B: PDF Wrapper */}
-                    <div className="w-fit">
+                    <div className="w-full flex justify-center 
+      min-[995px]:w-fit 
+      max-w-[450px] 
+      max-[599px]:max-w-[350px] 
+      max-[399px]:max-w-[290px]
+      min-[1536px]:max-w-none"
+                    >
                       {note.pdf?.asset?.url && (
                         <NotesPdfClient url={note.pdf.asset.url} title={note.title} />
                       )}
                     </div>
+
                   </div>
                 </div>
 

@@ -2,45 +2,59 @@
 
 import { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-// Note: In v9, these CSS imports are still required
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-// Updated worker source to match your specific version 4.4.168
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@4.4.168/build/pdf.worker.min.mjs`;
 
 export default function PdfViewer({ url }: { url: string; title?: string }) {
-  // Explicitly typing numPages to avoid the 'any' error
   const [numPages, setNumPages] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [renderHeight, setRenderHeight] = useState<number>(650);
+  const [pdfWidth, setPdfWidth] = useState<number>(450); // Default for mobile
 
-  useEffect(() => {
-    const calculateSize = () => {
-      const vh = window.innerHeight * 0.60; 
-      setRenderHeight(vh);
-    };
-    calculateSize();
-    window.addEventListener('resize', calculateSize);
-    return () => window.removeEventListener('resize', calculateSize);
-  }, []);
+useEffect(() => {
+  const handleResize = () => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    
+    if (vw >= 1536) {
+      // STEP 5: Large Desktop (Ultra-wide/High-res)
+      setPdfWidth(Math.floor((vh * 0.70) * 0.707));
+    } else if (vw >= 995) {
+      // STEP 1: Standard Desktop (13" Laptops, etc.)
+      setPdfWidth(Math.floor((vh * 0.60) * 0.707));
+    } else if (vw >= 600) {
+      // STEP 2: Large Mobile/Tablet
+      setPdfWidth(450);
+    } else if (vw >= 400) {
+      // STEP 3: Standard Mobile
+      setPdfWidth(350);
+    } else {
+      // STEP 4: Small Mobile
+      setPdfWidth(290);
+    }
+  };
 
-  // Fix for the 'numPages' has an 'any' type error
+  handleResize();
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
   function onDocumentLoadSuccess(pdf: { numPages: number }): void {
     setNumPages(pdf.numPages);
   }
 
   return (
-    <div className="w-fit flex flex-col items-start">
+    <div className="flex flex-col items-center min-[995px]:items-start">
       <div className="bg-white shadow-sm border border-black/5 overflow-hidden">
         <Document
           file={url}
-          onLoadSuccess={onDocumentLoadSuccess} // Using the typed function here
+          onLoadSuccess={onDocumentLoadSuccess} // Now it can find this function
           loading={<div className="p-10 text-xs lowercase italic">loading...</div>}
         >
-          <Page 
-            pageNumber={currentPage} 
-            height={renderHeight}
+          <Page
+            pageNumber={currentPage}
+            width={pdfWidth} // Explicit width prevents cropping
             renderAnnotationLayer={true}
             renderTextLayer={true}
             className="block"
@@ -48,6 +62,7 @@ export default function PdfViewer({ url }: { url: string; title?: string }) {
         </Document>
       </div>
 
+      {/* Minimalist Controls */}
       <div className="mt-3 flex flex-col gap-1 text-sm font-normal lowercase w-full">
         <div className="flex justify-between items-center w-full">
           <div className="flex items-center gap-4">
@@ -70,10 +85,10 @@ export default function PdfViewer({ url }: { url: string; title?: string }) {
             </button>
           </div>
 
-          <a 
-            href={url} 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
             className="hover:underline italic text-[11px] opacity-70"
           >
             download pdf
