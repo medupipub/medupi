@@ -3,9 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import PortableTextRenderer from "@/components/PortableTextRenderer";
-import NotesPdfClient from '@/components/NotesPdfClient'; // Added this import
+import NotesPdfClient from '@/components/NotesPdfClient';
 
-// Revalidate every 60 seconds
 export const revalidate = 60;
 
 export default async function NotesPage() {
@@ -27,9 +26,7 @@ export default async function NotesPage() {
                 className="bg-[#ffb347] w-full flex flex-col md:flex-row p-[20px] min-h-[400px] relative shadow-[0_0_0.8rem_0.8rem_#ffb347]"
             >
                 {/* Sidebar */}
-                <div
-                    className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl w-[20%] max-w-[200px] p-2.5 pt-12"
-                >
+                <div className="font-oso font-semibold leading-[0.9] relative z-20 text-2xl w-[20%] max-w-[200px] p-2.5 pt-12">
                     <Link href="/notes">
                         <p className="md:text-[clamp(1rem,2vw,1.5rem)]">Notes Archive</p>
                     </Link>
@@ -38,7 +35,6 @@ export default async function NotesPage() {
                 {/* Main Content */}
                 <div className="flex flex-col p-5 w-full md:w-[80%] max-w-screen-xl">
                     {sortedNotes.map((note, noteIndex) => {
-                        // Format the date (e.g., "October 2025")
                         const noteDate = new Date(note.validUntil || note._createdAt).toLocaleDateString('en-GB', {
                             month: 'long',
                             year: 'numeric'
@@ -46,24 +42,22 @@ export default async function NotesPage() {
 
                         return (
                             <div key={note._id} className="w-full">
-
-                                {/* 1. Separator & Date - only show if not the first note */}
+                                
+                                {/* 1. Separator & Date (Only show between items) */}
                                 {noteIndex > 0 && (
-                                    <div className="w-full flex flex-col items-start my-16">
-                                        {/* The Date Label */}
+                                    <div className="w-full flex flex-col items-center my-16">
                                         <span className="mb-4 font-oso text-sm uppercase tracking-widest opacity-60">
                                             {noteDate}
                                         </span>
-                                        {/* The Dashed Line */}
                                         <div className="w-full max-w-6xl border-t-2 border-black border-dashed opacity-30"></div>
                                     </div>
                                 )}
 
-                                {/* 2. Individual Note Content (Centered Layout) */}
+                                {/* 2. Individual Note Content */}
                                 <div className="mb-32 flex flex-col items-center">
 
-                                    {/* Title */}
-                                    <div className="w-full flex justify-">
+                                    {/* Title: Fully Centered */}
+                                    <div className="w-full flex justify-center">
                                         <div className="w-full max-w-screen-xl px-5 text-center">
                                             <h2 className="text-[clamp(1.5em,4vw,3em)] py-7">
                                                 {note.title}
@@ -71,24 +65,32 @@ export default async function NotesPage() {
                                         </div>
                                     </div>
 
-                                    {/* Media Row (Image + PDF) with the new 995px breakpoint */}
-                                    <div className="w-full flex justify-center">
-                                        <div className="flex flex-col min-[995px]:flex-row gap-5 items-center min-[995px]:items-start px-5 overflow-x-auto pb-4">
+                                    {/* Centered Media Row (Image + PDF) */}
+                                    <div className="w-full flex justify-center px-4 overflow-hidden">
+                                        <div className="flex flex-col min-[995px]:flex-row gap-8 min-[1536px]:gap-16 items-center min-[995px]:items-start w-full max-w-[1200px] min-[1536px]:max-w-[1600px] justify-center">
 
-                                            {/* Image */}
-                                            <div className="w-fit flex flex-col">
+                                            {/* Column A: Image Wrapper */}
+                                            <div className="w-full flex flex-col items-center 
+                                                min-[995px]:w-fit 
+                                                max-w-[450px] 
+                                                max-[599px]:max-w-[350px] 
+                                                max-[399px]:max-w-[290px]
+                                                min-[1536px]:max-w-none"
+                                            >
                                                 {note.images?.[0] && (
                                                     <>
                                                         <Image
                                                             src={note.images[0]}
                                                             alt={note.captions?.[0] || "Note Image"}
-                                                            width={800}
-                                                            height={1131}
-                                                            className="w-auto h-[60vh] max-w-full object-contain shadow-sm border border-black/5"
+                                                            width={1200}
+                                                            height={1600}
+                                                            className="w-auto h-auto shadow-sm border border-black/5 object-contain
+                                                            min-[995px]:h-[60vh] 
+                                                            min-[1536px]:h-[70vh]"
                                                             priority
                                                         />
                                                         {note.captions?.[0] && (
-                                                            <p className="mt-3 text-[13px] italic font-light lowercase leading-tight max-w-full">
+                                                            <p className="mt-3 text-[11px] italic font-light lowercase leading-tight text-center w-full min-[1536px]:text-[13px]">
                                                                 {note.captions[0]}
                                                             </p>
                                                         )}
@@ -96,16 +98,23 @@ export default async function NotesPage() {
                                                 )}
                                             </div>
 
-                                            {/* PDF */}
-                                            <div className="w-fit">
+                                            {/* Column B: PDF Wrapper */}
+                                            <div className="w-full flex justify-center 
+                                                min-[995px]:w-fit 
+                                                max-w-[450px] 
+                                                max-[599px]:max-w-[350px] 
+                                                max-[399px]:max-w-[290px]
+                                                min-[1536px]:max-w-none"
+                                            >
                                                 {note.pdf?.asset?.url && (
                                                     <NotesPdfClient url={note.pdf.asset.url} title={note.title} />
                                                 )}
                                             </div>
+
                                         </div>
                                     </div>
 
-                                    {/* Description */}
+                                    {/* 3. Description: Centered Underneath */}
                                     <div className="w-full max-w-screen-xl px-5 flex justify-center mt-12">
                                         <div className="w-full md:w-[60%] lg:w-[50%] pt-8">
                                             {note.eventDescription && (
@@ -115,6 +124,7 @@ export default async function NotesPage() {
                                             )}
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         );

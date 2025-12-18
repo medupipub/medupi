@@ -30,14 +30,11 @@ export default function Header({ pages }: { pages: Page[] }) {
 
   return (
     <>
-      {/* Wrapper to group sticky header + dropdown */}
       <div className="sticky top-0 z-30">
-        {/* Header */}
         <header className="bg-[#b6c7d9] shadow-[0_0_0.8rem_0.8rem_#b6c7d9] z-30 p-6 flex items-center justify-between md:sticky md:top-0">
-          {/* Logo with optional SVG */}
           <Link href="/">
             <div className="flex items-center gap-2">
-                {showLogoSvg && (
+              {showLogoSvg && (
                 <Image
                   src="/SVG/Arrow_L.svg"
                   alt="Custom SVG"
@@ -53,12 +50,10 @@ export default function Header({ pages }: { pages: Page[] }) {
                 width="135"
                 height="50"
               />
-              
             </div>
           </Link>
 
           <div className="flex items-center ml-auto relative">
-            {/* Burger/Arrow Icon */}
             <button
               onClick={handleToggle}
               className="z-30 w-10 h-10 flex items-center justify-center"
@@ -83,7 +78,6 @@ export default function Header({ pages }: { pages: Page[] }) {
                   : 'opacity-0 pointer-events-none translate-x-0'
               } ${isOpening ? 'transition-all duration-300' : ''}`}
             >
-              {/* Dynamic pages */}
               {pages.map((page) => (
                 <Link
                   key={page._id}
@@ -93,8 +87,6 @@ export default function Header({ pages }: { pages: Page[] }) {
                   {page.title}
                 </Link>
               ))}
-
-              {/* Fixed additional links */}
               <Link href="/publications" className="hover:underline whitespace-nowrap">
                 Publications
               </Link>
@@ -104,8 +96,6 @@ export default function Header({ pages }: { pages: Page[] }) {
               <Link href="/notes" className="hover:underline whitespace-nowrap">
                 Notes
               </Link>
-              
-
             </div>
           </div>
         </header>
@@ -116,6 +106,7 @@ export default function Header({ pages }: { pages: Page[] }) {
             menuOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
+          {/* Added "Notes" Link here alongside others */}
           <div className="flex flex-row items-center justify-center p-4 gap-4 font-oso font-semibold leading-[0.9] font-normal text-black text-sm overflow-x-auto">
             {pages.map((page) => (
               <Link
@@ -140,6 +131,13 @@ export default function Header({ pages }: { pages: Page[] }) {
               className="hover:underline whitespace-nowrap"
             >
               Archive
+            </Link>
+            <Link
+              href="/notes"
+              onClick={() => setMenuOpen(false)}
+              className="hover:underline whitespace-nowrap"
+            >
+              Notes
             </Link>
           </div>
         </div>
